@@ -16,7 +16,7 @@ void setup(void) {
   
 }
 
- 
+//ceci est le main
 void loop(void) {
   leds.setColorRGB(1,0,253,0);
   
