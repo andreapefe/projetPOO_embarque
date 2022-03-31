@@ -4,7 +4,8 @@
 #include <Wire.h>
 
 #include <ChainableLED.h>
- 
+
+//We only have one LED
 #define NUM_LEDS 1
  
 U8G2_SH1107_SEEED_128X128_1_SW_I2C u8g2(U8G2_R0, /* clock=*/ SCL, /* data=*/ SDA, /* reset=*/ U8X8_PIN_NONE);
@@ -18,7 +19,7 @@ void setup(void) {
 
  
 void loop(void) {
-  leds.setColorRGB(1,0,253,0);
+  leds.setColorRGB(1,0,253,0); //Green does not work yet
   
   u8g2.firstPage();
   do {
