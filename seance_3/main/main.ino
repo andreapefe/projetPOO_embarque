@@ -11,9 +11,11 @@ void setup()
 void loop()
 {
   maLED.allumer_rouge();
-  maLED.attendre_2s();
+  maLED.attendre_1s();
   maLED.allumer_vert();
-  maLED.attendre_2s();
+  maLED.attendre_1s();
+  maLED.allumer_bleu();
+  maLED.attendre_1s();
   //maLED.eteindre();
 }
  

@@ -16,10 +16,18 @@ void IHM :: allumer_vert(){
   rgb->setColorRGB(0,0,253,0);
 }
 
+void IHM :: allumer_bleu(){
+  rgb->setColorRGB(0,0,0,253);
+}
+
 void IHM :: eteindre(){
   rgb->setColorRGB(0,0,0,0);
 }
 
 void IHM :: attendre_2s(){
   delay(2000);
+}
+
+void IHM :: attendre_1s(){
+  delay(1000);
 }

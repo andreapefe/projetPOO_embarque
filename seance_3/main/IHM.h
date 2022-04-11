@@ -24,9 +24,13 @@ class IHM{
 
     void allumer_vert();
 
+    void allumer_bleu();
+
     void eteindre();
 
     void attendre_2s();
+
+    void attendre_1s();
 };
 
 #endif
