@@ -2,11 +2,7 @@
 #define UTILISATEUR_H
 
 #include <HardwareSerial.h>
-#include "definitions.h"
-
-
-
-
+#include "IHM.h"
 
 class Utilisateur{
 public:
@@ -26,8 +22,7 @@ public:
 
 private:
 //Attributs
-  mode_utilisation modo;  
-  heure_actuelle 
+  mode_utilisation modo;   
 
   
 };
