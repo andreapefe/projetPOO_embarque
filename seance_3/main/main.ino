@@ -1,21 +1,26 @@
 #include <Arduino.h>
 #include "IHM.h"
 
-IHM maLED;
+IHM monIHM;
+//int mode = 1;
 
 void setup()
 {
-  maLED.initLedRgb();
+  monIHM.init_IHM();
 }
  
 void loop()
 {
-  maLED.allumer_rouge();
-  maLED.attendre_1s();
-  maLED.allumer_vert();
-  maLED.attendre_1s();
-  maLED.allumer_bleu();
-  maLED.attendre_1s();
-  //maLED.eteindre();
+//  monIHM.allumer_rouge();
+//  monIHM.attendre_1s();
+//  monIHM.allumer_vert();
+//  monIHM.attendre_1s();
+//  monIHM.allumer_bleu();
+//  monIHM.attendre_1s();
+//  monIHM.eteindre();
+
+    monIHM.welcome_page();
+    //monIHM.underline(mode);
+    monIHM.allumer_orange();   
 }
  
