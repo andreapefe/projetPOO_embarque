@@ -7,14 +7,16 @@ IHM::IHM(){
 
 IHM :: ~IHM(){}
 
-//LED
-
 void IHM :: init_IHM(){
   rgb->init();
   oled -> begin();
   Serial.begin(9600);
   pinMode(ROTARY_ANGLE_SENSOR, INPUT);
 }
+
+
+////////////////////// LED ////////////////////////////////
+
 
 void IHM :: allumer_rouge(){
   rgb->setColorRGB(0,253,0,0);
@@ -56,7 +58,7 @@ void IHM :: change_color(float temp){   //à tester avec le cpateur
 }
 
 
-//OLED
+////////////////////// OLED ////////////////////////////////
 
 void IHM :: welcome_page(){
   float angle = this -> poto();
@@ -69,10 +71,6 @@ void IHM :: welcome_page(){
     oled -> drawStr(0,100, "Angle : ");
     oled -> drawStr(55,100,String(angle).c_str());
   } while (oled -> nextPage());
-}
-
-int IHM :: config_mode(){
-   
 }
 
 void IHM :: underline(int mode){
@@ -89,7 +87,7 @@ void IHM :: underline(int mode){
 }
 
 
-// POTO
+////////////////////// POTO ////////////////////////////////
 
 float IHM :: poto(){
   
@@ -101,5 +99,25 @@ float IHM :: poto(){
   Serial.println(degrees);
 
   return degrees;
-  
+}
+
+
+////////////////////// POTO + OLED ////////////////////////////////
+
+int IHM :: config_mode(){
+   oled -> clearDisplay();  //effacer écran
+   while(1){
+    float angle = this -> poto(); //récupérer valeur potentiomètre
+    oled -> firstPage();
+    do {
+    oled -> setFont(u8g2_font_ncenB10_tr);
+    oled -> drawStr(10,25,"Automatique");
+    oled -> drawStr(10,80,"Manuel");
+    if(angle < 150){                //en haut
+      oled -> drawHLine(10,26,100);
+    }else{                          //en bas
+    oled -> drawHLine(10,81,55);
+    }
+  } while (oled -> nextPage());
+   }
 }

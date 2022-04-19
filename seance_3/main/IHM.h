@@ -52,14 +52,16 @@ class IHM{
     //OLED
 
     void welcome_page();  //affichage écran accueil
-
-    int config_mode();  //retourne le mode de configuration choisi
-
     void underline(int mode); //souligne du texte
 
     //POTENTIOMETRE
 
     float poto();
+
+    //POTO + OLED
+    
+    int config_mode();  //retourne le mode de configuration choisi
+    
 };
 
 #endif

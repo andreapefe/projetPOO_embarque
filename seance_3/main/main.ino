@@ -21,6 +21,7 @@ void loop()
 
     monIHM.welcome_page();
     //monIHM.underline(mode);
-    monIHM.allumer_orange();   
+    monIHM.allumer_orange(); 
+    monIHM.config_mode();  
 }
  
