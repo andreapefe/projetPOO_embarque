@@ -56,12 +56,12 @@ class IHM{
     //OLED
 
     void welcome_page();  //affichage écran accueil
-    void afficher_vitesse();  //afficher la vitesse à l'écran
     void afficher(u8g2_uint_t x, u8g2_uint_t y, const char* var);  //affichage de "var" à l'écran en (x,y)
 
     //POTENTIOMETRE
 
     float poto();
+    float get_speed();  //retourne la vitesse du poto
 
     //POTO + OLED
     

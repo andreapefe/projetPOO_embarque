@@ -82,10 +82,6 @@ void IHM :: welcome_page(){
   } while (oled -> nextPage());
 }
 
-void IHM :: afficher_vitesse(){
-  float angle = this -> poto();
-}
-
 
 ////////////////////// POTO ////////////////////////////////
 
@@ -99,6 +95,10 @@ float IHM :: poto(){
   //Serial.println(degrees);
 
   return degrees;
+}
+
+float IHM :: get_speed(){
+  return this -> poto();
 }
 
 
