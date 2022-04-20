@@ -122,6 +122,15 @@ int IHM :: config_mode(){
    }
 }
 
+void IHM :: afficher_temp(float temp){
+  oled -> firstPage();
+    do {
+      oled -> setFont(u8g2_font_ncenB10_tr);
+      oled -> drawStr(50,50,String(temp).c_str());
+    } while (oled -> nextPage());
+}
+
+
 ////////////////////// BOUTON POUSSOIR ////////////////////////////////
 
 int IHM :: button_state(){

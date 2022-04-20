@@ -57,6 +57,7 @@ class IHM{
 
     void welcome_page();  //affichage écran accueil
     void afficher(u8g2_uint_t x, u8g2_uint_t y, const char* var);  //affichage de "var" à l'écran en (x,y)
+    void afficher_temp(float temp);  //afficher la température
 
     //POTENTIOMETRE
 
