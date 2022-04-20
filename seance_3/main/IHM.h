@@ -4,6 +4,7 @@
 #include <ChainableLED.h>
 #include <Arduino.h>
 #include <U8g2lib.h>
+#include "definitions.h"
 
 //led
 
@@ -66,7 +67,8 @@ class IHM{
 
     //POTO + OLED
     
-    int config_mode();  //retourne le mode de configuration choisi
+    mode_utilisation config_mode();  //retourne le mode de configuration choisi
+    void watch_speed(); //visualisation graphique de la vitesse du ventilateur
 
     //BOUTON POUSSOIR
 
