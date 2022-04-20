@@ -2,26 +2,21 @@
 #include "IHM.h"
 
 IHM monIHM;
-//int mode = 1;
+int etat;
 
 void setup()
 {
   monIHM.init_IHM();
+  Serial.begin(9600);
 }
  
 void loop()
 {
-//  monIHM.allumer_rouge();
-//  monIHM.attendre_1s();
-//  monIHM.allumer_vert();
-//  monIHM.attendre_1s();
-//  monIHM.allumer_bleu();
-//  monIHM.attendre_1s();
-//  monIHM.eteindre();
-
     monIHM.welcome_page();
-    //monIHM.underline(mode);
     monIHM.allumer_orange(); 
-    monIHM.config_mode();  
+    monIHM.config_mode();
+    etat = monIHM.button_state();
+    Serial.println("bonjour");
+    
 }
  

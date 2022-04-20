@@ -19,6 +19,10 @@
 #define GROVE_VCC 5 //VCC of the grove interface is normally 5v
 #define FULL_ANGLE 300 //full value of the rotary angle is 300 degree
 
+//bouton poussoir
+
+#define PUSHBUTTON 2
+
 class IHM{
 
   private:
@@ -52,7 +56,8 @@ class IHM{
     //OLED
 
     void welcome_page();  //affichage écran accueil
-    void underline(int mode); //souligne du texte
+    void afficher_vitesse();  //afficher la vitesse à l'écran
+    void afficher(u8g2_uint_t x, u8g2_uint_t y, const char* var);  //affichage de "var" à l'écran en (x,y)
 
     //POTENTIOMETRE
 
@@ -61,6 +66,10 @@ class IHM{
     //POTO + OLED
     
     int config_mode();  //retourne le mode de configuration choisi
+
+    //BOUTON POUSSOIR
+
+    int button_state(); //retourne l'état du bouton poussoir
     
 };
 

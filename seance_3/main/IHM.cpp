@@ -8,10 +8,11 @@ IHM::IHM(){
 IHM :: ~IHM(){}
 
 void IHM :: init_IHM(){
-  rgb->init();
-  oled -> begin();
-  Serial.begin(9600);
-  pinMode(ROTARY_ANGLE_SENSOR, INPUT);
+  rgb->init();  //led rgb
+  oled -> begin();  //écran oled
+  //Serial.begin(9600);
+  pinMode(ROTARY_ANGLE_SENSOR, INPUT);  //poto
+  pinMode(PUSHBUTTON, INPUT); //bouton poussoir
 }
 
 
@@ -60,6 +61,14 @@ void IHM :: change_color(float temp){   //à tester avec le cpateur
 
 ////////////////////// OLED ////////////////////////////////
 
+void IHM :: afficher(u8g2_uint_t x, u8g2_uint_t y, const char* var){
+  oled -> firstPage();
+  do {
+    oled -> setFont(u8g2_font_ncenB10_tr);
+    oled -> drawStr(x,y,var);
+  } while (oled -> nextPage());
+}
+
 void IHM :: welcome_page(){
   float angle = this -> poto();
   
@@ -73,17 +82,8 @@ void IHM :: welcome_page(){
   } while (oled -> nextPage());
 }
 
-void IHM :: underline(int mode){
-
-  oled -> firstPage();
-  do {
-    oled -> setFont(u8g2_font_ncenB10_tr);
-    if(mode == 1){
-      oled -> drawHLine(0,51,100);
-    }else{
-    oled -> drawVLine(50,51,100);
-    }
-  } while (oled -> nextPage());
+void IHM :: afficher_vitesse(){
+  float angle = this -> poto();
 }
 
 
@@ -95,8 +95,8 @@ float IHM :: poto(){
   int sensor_value = analogRead(ROTARY_ANGLE_SENSOR);
   voltage = (float)sensor_value*ADC_REF/1023;
   float degrees = (voltage*FULL_ANGLE)/GROVE_VCC;
-  Serial.println("The angle between the mark and the starting position:");
-  Serial.println(degrees);
+  //Serial.println("The angle between the mark and the starting position:");
+  //Serial.println(degrees);
 
   return degrees;
 }
@@ -110,14 +110,21 @@ int IHM :: config_mode(){
     float angle = this -> poto(); //récupérer valeur potentiomètre
     oled -> firstPage();
     do {
-    oled -> setFont(u8g2_font_ncenB10_tr);
-    oled -> drawStr(10,25,"Automatique");
-    oled -> drawStr(10,80,"Manuel");
-    if(angle < 150){                //en haut
-      oled -> drawHLine(10,26,100);
-    }else{                          //en bas
-    oled -> drawHLine(10,81,55);
-    }
-  } while (oled -> nextPage());
+      oled -> setFont(u8g2_font_ncenB10_tr);
+      oled -> drawStr(10,25,"Automatique");
+      oled -> drawStr(10,80,"Manuel");
+      if(angle < 150){                //en haut
+        oled -> drawHLine(10,26,100); //ligne horizontale (x,y,longueur) qui souligne mode automatique
+      }else{                          //en bas
+        oled -> drawHLine(10,81,55);  //ligne horizontale (x,y,longueur) qui souligne mode manuel
+      }
+    } while (oled -> nextPage());
    }
+}
+
+////////////////////// BOUTON POUSSOIR ////////////////////////////////
+
+int IHM :: button_state(){
+  int state = digitalRead(PUSHBUTTON);
+  return state;
 }
