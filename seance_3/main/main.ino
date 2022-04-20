@@ -12,11 +12,12 @@ void setup()
  
 void loop()
 {
-    monIHM.welcome_page();
-    monIHM.allumer_orange(); 
-    monIHM.config_mode();
-    etat = monIHM.button_state();
-    Serial.println("bonjour");
-    
+//    monIHM.welcome_page();
+//    monIHM.allumer_orange(); 
+//    monIHM.config_mode();
+//    etat = monIHM.button_state();
+//    Serial.println("bonjour");
+
+      monIHM.watch_speed();
 }
  
