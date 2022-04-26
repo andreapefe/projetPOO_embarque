@@ -1,8 +1,6 @@
 #include "utilisateur.h"
 
-Utilisateur::Utilisateur(){
-  
-}
+Utilisateur::Utilisateur(){}
 
 mode_utilisation Utilisateur::get_mode(){
   return modo;

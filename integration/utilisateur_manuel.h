@@ -16,7 +16,11 @@ public:
   void afficherParametres(HardwareSerial * port);
 
   //Méthodes pour commander le ventilateur
+<<<<<<< Updated upstream
   void lancer(IHM * maIHM, capteur_temp * cp, ventilateur * fan);
+=======
+  void lancer(IHM * maIHM);  
+>>>>>>> Stashed changes
 
 private:
 //Attributs

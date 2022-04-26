@@ -68,11 +68,14 @@ class IHM{
     //POTO + OLED
     
     mode_utilisation config_mode();  //retourne le mode de configuration choisi
+<<<<<<< Updated upstream
     void watch_speed(); //visualisation graphique de la vitesse du ventilateur
+=======
+>>>>>>> Stashed changes
 
     //BOUTON POUSSOIR
 
-    int button_state(); //retourne l'état du bouton poussoir
+    bool button_state(); //retourne l'état du bouton poussoir
     
 };
 

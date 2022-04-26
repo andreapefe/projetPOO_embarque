@@ -57,8 +57,13 @@ class IHM{
     //OLED
 
     void welcome_page();  //affichage écran accueil
+<<<<<<< Updated upstream
     void afficher(u8g2_uint_t x, u8g2_uint_t y, const char* var);  //affichage de "var" à l'écran en (x,y)
     void afficher_temp(float temp);  //afficher la température
+=======
+    void afficher_vitesse();  //afficher la vitesse à l'écran
+    void afficher(u8g2_uint_t x, u8g2_uint_t y, const char* var);  //affichage de "var" à l'écran en (x,y)
+>>>>>>> Stashed changes
 
     //POTENTIOMETRE
 
@@ -68,11 +73,18 @@ class IHM{
     //POTO + OLED
     
     mode_utilisation config_mode();  //retourne le mode de configuration choisi
+<<<<<<< Updated upstream
     void watch_speed(); //visualisation graphique de la vitesse du ventilateur
 
     //BOUTON POUSSOIR
 
     int button_state(); //retourne l'état du bouton poussoir
+=======
+
+    //BOUTON POUSSOIR
+
+    bool button_state(); //retourne l'état du bouton poussoir
+>>>>>>> Stashed changes
     
 };
 

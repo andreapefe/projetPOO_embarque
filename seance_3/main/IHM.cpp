@@ -10,7 +10,7 @@ IHM :: ~IHM(){}
 void IHM :: init_IHM(){
   rgb->init();  //led rgb
   oled -> begin();  //écran oled
-  //Serial.begin(9600);
+  Serial.begin(9600);
   pinMode(ROTARY_ANGLE_SENSOR, INPUT);  //poto
   pinMode(PUSHBUTTON, INPUT); //bouton poussoir
 }
@@ -114,7 +114,7 @@ float IHM :: get_speed(){
 
 mode_utilisation IHM :: config_mode(){
    oled -> clearDisplay();  //effacer écran
-   while(1){
+   while(!this->button_state()){
     float angle = this -> poto(); //récupérer valeur potentiomètre
     oled -> firstPage();
     do {
@@ -127,6 +127,7 @@ mode_utilisation IHM :: config_mode(){
         oled -> drawHLine(10,81,55);  //ligne horizontale (x,y,longueur) qui souligne mode manuel
       }
     } while (oled -> nextPage());
+    
    }
 }
 
@@ -161,7 +162,11 @@ void IHM :: watch_speed(){
 
 ////////////////////// BOUTON POUSSOIR ////////////////////////////////
 
-int IHM :: button_state(){
-  int state = digitalRead(PUSHBUTTON);
+bool IHM :: button_state(){
+  bool state = false;
+  if (digitalRead(PUSHBUTTON) == HIGH){
+    state = true ;
+  }
+  //delay(1);
   return state;
 }

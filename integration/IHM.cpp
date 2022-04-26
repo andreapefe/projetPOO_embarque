@@ -10,7 +10,11 @@ IHM :: ~IHM(){}
 void IHM :: init_IHM(){
   rgb->init();  //led rgb
   oled -> begin();  //écran oled
+<<<<<<< Updated upstream
   //Serial.begin(9600);
+=======
+  Serial.begin(9600);
+>>>>>>> Stashed changes
   pinMode(ROTARY_ANGLE_SENSOR, INPUT);  //poto
   pinMode(PUSHBUTTON, INPUT); //bouton poussoir
 }
@@ -82,6 +86,7 @@ void IHM :: welcome_page(){
   } while (oled -> nextPage());
 }
 
+<<<<<<< Updated upstream
 
 void IHM :: afficher_temp(float temp){
   oled -> firstPage();
@@ -89,6 +94,10 @@ void IHM :: afficher_temp(float temp){
       oled -> setFont(u8g2_font_ncenB10_tr);
       oled -> drawStr(50,50,String(temp).c_str());
     } while (oled -> nextPage());
+=======
+void IHM :: afficher_vitesse(){
+  float angle = this -> poto();
+>>>>>>> Stashed changes
 }
 
 ////////////////////// POTO ////////////////////////////////
@@ -114,9 +123,14 @@ float IHM :: get_speed(){
 
 mode_utilisation IHM :: config_mode(){
    oled -> clearDisplay();  //effacer écran
+<<<<<<< Updated upstream
    float angle = this -> poto(); //récupérer valeur potentiomètre
    while(!button_state()){
     angle = this -> poto();
+=======
+   while(!this->button_state()){
+    float angle = this -> poto(); //récupérer valeur potentiomètre
+>>>>>>> Stashed changes
     oled -> firstPage();
     do {
       oled -> setFont(u8g2_font_ncenB10_tr);
@@ -128,6 +142,7 @@ mode_utilisation IHM :: config_mode(){
         oled -> drawHLine(10,81,55);  //ligne horizontale (x,y,longueur) qui souligne mode manuel
       }
     } while (oled -> nextPage());
+<<<<<<< Updated upstream
    }
    if (angle < 150){
       return Automatique;
@@ -166,5 +181,19 @@ void IHM :: watch_speed(){
 
 int IHM :: button_state(){
   int state = digitalRead(PUSHBUTTON);
+=======
+    
+   }
+}
+
+////////////////////// BOUTON POUSSOIR ////////////////////////////////
+
+bool IHM :: button_state(){
+  bool state = false;
+  if (digitalRead(PUSHBUTTON) == HIGH){
+    state = true ;
+  }
+  //delay(1);
+>>>>>>> Stashed changes
   return state;
 }
