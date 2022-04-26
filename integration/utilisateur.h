@@ -3,6 +3,9 @@
 
 #include <HardwareSerial.h>
 #include "IHM.h"
+#include "definitions.h"
+#include "capteur_temp.h"
+#include "ventilateur.h"
 
 class Utilisateur{
 public:
@@ -12,12 +15,12 @@ public:
 //Méthodes pour configurer l'utilisateur
   mode_utilisation get_mode();
 
-  virtual void afficherParametres(HardwareSerial * port);
+  virtual void afficherParametres(HardwareSerial * port)=0;
 
   void set_mode(mode_utilisation mod);
 
-//Méthodes pour afficher sur le IHM
-  virtual void afficherInit();
+//Méthodes de lançage
+  virtual void lancer(IHM * maIHM, capteur_temp * cp, ventilateur * fan)=0;
   
 
 private:

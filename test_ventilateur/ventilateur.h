@@ -1,10 +1,10 @@
-#ifndef __Ventilateur.hpp__
-#define __Ventilateur.hpp__
+#ifndef Ventilateur
+#define Ventilateur
 
 #define PORT 13     //  OUTPUT D7 (GPIO13) --> FAN
 #define Pushbutton 12 // INPUT D5(GPIO14) --> Push Button
 
-#include <iostream>
+//#include <iostream>
 using namespace std;
 
 

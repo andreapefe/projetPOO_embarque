@@ -8,10 +8,11 @@ IHM::IHM(){
 IHM :: ~IHM(){}
 
 void IHM :: init_IHM(){
-  rgb->init();
-  oled -> begin();
-  Serial.begin(9600);
-  pinMode(ROTARY_ANGLE_SENSOR, INPUT);
+  rgb->init();  //led rgb
+  oled -> begin();  //écran oled
+  //Serial.begin(9600);
+  pinMode(ROTARY_ANGLE_SENSOR, INPUT);  //poto
+  pinMode(PUSHBUTTON, INPUT); //bouton poussoir
 }
 
 
@@ -60,6 +61,14 @@ void IHM :: change_color(float temp){   //à tester avec le cpateur
 
 ////////////////////// OLED ////////////////////////////////
 
+void IHM :: afficher(u8g2_uint_t x, u8g2_uint_t y, const char* var){
+  oled -> firstPage();
+  do {
+    oled -> setFont(u8g2_font_ncenB10_tr);
+    oled -> drawStr(x,y,var);
+  } while (oled -> nextPage());
+}
+
 void IHM :: welcome_page(){
   float angle = this -> poto();
   
@@ -73,19 +82,14 @@ void IHM :: welcome_page(){
   } while (oled -> nextPage());
 }
 
-void IHM :: underline(int mode){
 
+void IHM :: afficher_temp(float temp){
   oled -> firstPage();
-  do {
-    oled -> setFont(u8g2_font_ncenB10_tr);
-    if(mode == 1){
-      oled -> drawHLine(0,51,100);
-    }else{
-    oled -> drawVLine(50,51,100);
-    }
-  } while (oled -> nextPage());
+    do {
+      oled -> setFont(u8g2_font_ncenB10_tr);
+      oled -> drawStr(50,50,String(temp).c_str());
+    } while (oled -> nextPage());
 }
-
 
 ////////////////////// POTO ////////////////////////////////
 
@@ -95,28 +99,72 @@ float IHM :: poto(){
   int sensor_value = analogRead(ROTARY_ANGLE_SENSOR);
   voltage = (float)sensor_value*ADC_REF/1023;
   float degrees = (voltage*FULL_ANGLE)/GROVE_VCC;
- // Serial.println("The angle between the mark and the starting position:");
- // Serial.println(degrees);
+  //Serial.println("The angle between the mark and the starting position:");
+  //Serial.println(degrees);
 
   return degrees;
+}
+
+float IHM :: get_speed(){
+  return this -> poto();
 }
 
 
 ////////////////////// POTO + OLED ////////////////////////////////
 
 mode_utilisation IHM :: config_mode(){
-   //oled -> clearDisplay();  //effacer écran
-   
-    float angle = this -> poto(); //récupérer valeur potentiomètre
+   oled -> clearDisplay();  //effacer écran
+   float angle = this -> poto(); //récupérer valeur potentiomètre
+   while(!button_state()){
+    angle = this -> poto();
     oled -> firstPage();
     do {
-    oled -> setFont(u8g2_font_ncenB10_tr);
-    oled -> drawStr(10,25,"Automatique");
-    oled -> drawStr(10,80,"Manuel");
-    if(angle < 150){                //en haut
-      oled -> drawHLine(10,26,100);
-    }else{                          //en bas
-    oled -> drawHLine(10,81,55);
-    }
-  } while (oled -> nextPage());
+      oled -> setFont(u8g2_font_ncenB10_tr);
+      oled -> drawStr(10,25,"Automatique");
+      oled -> drawStr(10,80,"Manuel");
+      if(angle < 150){                //en haut
+        oled -> drawHLine(10,26,100); //ligne horizontale (x,y,longueur) qui souligne mode automatique
+      }else{                          //en bas
+        oled -> drawHLine(10,81,55);  //ligne horizontale (x,y,longueur) qui souligne mode manuel
+      }
+    } while (oled -> nextPage());
+   }
+   if (angle < 150){
+      return Automatique;
+   } else {
+    return Manuel;
+   }
+}
+
+void IHM :: watch_speed(){
+  float vitesse = get_speed();
+  oled -> drawRFrame(0,60,100,10,0); //(x,y,largeur,hauteur,arrondi des angles)
+  if(vitesse >= 0 && vitesse < 30){
+    oled -> drawBox(0,60,10,10);
+  }else if(vitesse >= 30 && vitesse < 60){
+    oled -> drawBox(0,60,20,10);
+  }else if(vitesse >= 60 && vitesse < 90){
+    oled -> drawBox(0,60,30,10);
+  }else if(vitesse >= 90 && vitesse < 120){
+    oled -> drawBox(0,60,40,10);
+  }else if(vitesse >= 120 && vitesse < 150){
+    oled -> drawBox(0,60,50,10);
+  }else if(vitesse >= 150 && vitesse < 180){
+    oled -> drawBox(0,60,60,10);
+  }else if(vitesse >= 180 && vitesse < 210){
+    oled -> drawBox(0,60,70,10);
+  }else if(vitesse >= 210 && vitesse < 240){
+    oled -> drawBox(0,60,80,10);
+  }else if(vitesse >= 240 && vitesse < 270){
+    oled -> drawBox(0,60,90,10);
+  }else if(vitesse >= 270 && vitesse < 300){
+    oled -> drawBox(0,60,100,10);
+  }
+}
+
+////////////////////// BOUTON POUSSOIR ////////////////////////////////
+
+int IHM :: button_state(){
+  int state = digitalRead(PUSHBUTTON);
+  return state;
 }

@@ -4,6 +4,7 @@
 #include "utilisateur.h"
 #include <HardwareSerial.h>
 #include "IHM.h"
+#include "capteur_temp.h"
 
 class Utilisateur_manuel : public Utilisateur {
   
@@ -15,7 +16,7 @@ public:
   void afficherParametres(HardwareSerial * port);
 
   //Méthodes pour commander le ventilateur
-  void control_continu();  
+  void lancer(IHM * maIHM, capteur_temp * cp, ventilateur * fan);
 
 private:
 //Attributs
