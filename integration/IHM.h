@@ -72,7 +72,7 @@ class IHM{
     
     mode_utilisation config_mode();  //retourne le mode de configuration choisi
 
-    void watch_speed(); //visualisation graphique de la vitesse du ventilateur
+    void watch_speed(float vitesse); //visualisation graphique de la vitesse du ventilateur
 
 
     //BOUTON POUSSOIR

@@ -123,10 +123,10 @@ float IHM :: get_speed(){
 mode_utilisation IHM :: config_mode(){
    oled -> clearDisplay();  //effacer écran
 
-   float angle = this -> poto(); //récupérer valeur potentiomètre
+   float angle = this->poto(); //récupérer valeur potentiomètre
 
    while(!this->button_state()){
-    float angle = this -> poto(); //récupérer valeur potentiomètre
+    angle = this -> poto(); //récupérer valeur potentiomètre
 
     oled -> firstPage();
     do {
@@ -146,32 +146,35 @@ mode_utilisation IHM :: config_mode(){
    } else {
     return Manuel;
    }
+   oled -> clearDisplay();
 }
 
-void IHM :: watch_speed(){
-  float vitesse = get_speed();
-  oled -> drawRFrame(0,60,100,10,0); //(x,y,largeur,hauteur,arrondi des angles)
-  if(vitesse >= 0 && vitesse < 30){
-    oled -> drawBox(0,60,10,10);
-  }else if(vitesse >= 30 && vitesse < 60){
-    oled -> drawBox(0,60,20,10);
-  }else if(vitesse >= 60 && vitesse < 90){
-    oled -> drawBox(0,60,30,10);
-  }else if(vitesse >= 90 && vitesse < 120){
-    oled -> drawBox(0,60,40,10);
-  }else if(vitesse >= 120 && vitesse < 150){
-    oled -> drawBox(0,60,50,10);
-  }else if(vitesse >= 150 && vitesse < 180){
-    oled -> drawBox(0,60,60,10);
-  }else if(vitesse >= 180 && vitesse < 210){
-    oled -> drawBox(0,60,70,10);
-  }else if(vitesse >= 210 && vitesse < 240){
-    oled -> drawBox(0,60,80,10);
-  }else if(vitesse >= 240 && vitesse < 270){
-    oled -> drawBox(0,60,90,10);
-  }else if(vitesse >= 270 && vitesse < 300){
-    oled -> drawBox(0,60,100,10);
-  }
+void IHM :: watch_speed(float vitesse){
+  oled -> firstPage();
+  do {
+    oled -> drawRFrame(0,60,100,10,0); //(x,y,largeur,hauteur,arrondi des angles)
+    if( vitesse < 10){
+      oled -> drawBox(0,60,10,10);
+    }else if(vitesse >= 10 && vitesse < 20){
+      oled -> drawBox(0,60,20,10);
+    }else if(vitesse >= 20 && vitesse < 30){
+      oled -> drawBox(0,60,30,10);
+    }else if(vitesse >= 30 && vitesse < 40){
+      oled -> drawBox(0,60,40,10);
+    }else if(vitesse >= 40 && vitesse < 50){
+      oled -> drawBox(0,60,50,10);
+    }else if(vitesse >= 50 && vitesse < 60){
+      oled -> drawBox(0,60,60,10);
+    }else if(vitesse >= 60 && vitesse < 70){
+      oled -> drawBox(0,60,70,10);
+    }else if(vitesse >= 70 && vitesse < 80){
+      oled -> drawBox(0,60,80,10);
+    }else if(vitesse >= 80 && vitesse < 90){
+      oled -> drawBox(0,60,90,10);
+    }else if(vitesse >= 90){
+      oled -> drawBox(0,60,100,10);
+    }
+  }while (oled -> nextPage());
 }
 
 ////////////////////// BOUTON POUSSOIR ////////////////////////////////

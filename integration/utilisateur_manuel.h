@@ -5,6 +5,7 @@
 #include <HardwareSerial.h>
 #include "IHM.h"
 #include "capteur_temp.h"
+#include "ventilateur.h"
 
 class Utilisateur_manuel : public Utilisateur {
   

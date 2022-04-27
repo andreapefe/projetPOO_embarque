@@ -27,6 +27,8 @@ void loop() {
     if (modo == Manuel){
      Utilisateur_manuel * userM = (Utilisateur_manuel *) new Utilisateur_manuel;
      user = userM;
+    }else {
+      monIHM.afficher_temp(0.00);
     }
 
   while(1){

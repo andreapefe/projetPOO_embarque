@@ -10,6 +10,9 @@ void Utilisateur_manuel::afficherParametres(HardwareSerial * port){
 //Lance le mode manuel dans ce cas
 
 void Utilisateur_manuel::lancer(IHM * maIHM, capteur_temp * cp, ventilateur * fan){
- maIHM->afficher_temp(cp->temperature());
- fan->set_speed(50);
+ //maIHM->afficher_temp(cp->temperature());
+ float v = (maIHM->get_speed())/MAX_VITESSE*100;
+ fan->set_speed(round(v));
+ maIHM->watch_speed(v);
+ 
 }

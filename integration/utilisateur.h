@@ -22,7 +22,7 @@ public:
 //Méthodes de lançage
 
   virtual void lancer(IHM * maIHM, capteur_temp * cp, ventilateur * fan)=0;
-
+  
   
 
 private:
