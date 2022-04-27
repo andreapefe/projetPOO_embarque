@@ -21,10 +21,7 @@ void setup() {
 
 void loop() {
     Serial.println("Hola");
-<<<<<<< Updated upstream
     
-=======
->>>>>>> Stashed changes
     modo = monIHM.config_mode();
 
     if (modo == Manuel){
@@ -32,13 +29,9 @@ void loop() {
      user = userM;
     }
 
-<<<<<<< Updated upstream
   while(1){
     user->lancer(&monIHM, &cp, &vent);
   }
    
-=======
-   // user->afficherParametres(&Serial);
->>>>>>> Stashed changes
   
 }

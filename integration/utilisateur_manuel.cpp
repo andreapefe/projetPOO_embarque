@@ -8,12 +8,8 @@ void Utilisateur_manuel::afficherParametres(HardwareSerial * port){
 }
 
 //Lance le mode manuel dans ce cas
-<<<<<<< Updated upstream
+
 void Utilisateur_manuel::lancer(IHM * maIHM, capteur_temp * cp, ventilateur * fan){
  maIHM->afficher_temp(cp->temperature());
  fan->set_speed(50);
-=======
-void Utilisateur_manuel::lancer(IHM * maIHM){
->>>>>>> Stashed changes
-  
 }

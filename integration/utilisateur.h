@@ -20,11 +20,9 @@ public:
   void set_mode(mode_utilisation mod);
 
 //Méthodes de lançage
-<<<<<<< Updated upstream
+
   virtual void lancer(IHM * maIHM, capteur_temp * cp, ventilateur * fan)=0;
-=======
-  virtual void lancer(IHM * maIHM)=0;
->>>>>>> Stashed changes
+
   
 
 private:
