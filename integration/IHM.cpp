@@ -86,6 +86,61 @@ void IHM :: afficher_temp(float temp){
     } while (oled -> nextPage());
 }
 
+int IHM :: select_chiffre(){
+
+  int chiffre = 0;
+  float angle = this->poto(); //récupérer valeur potentiomètre
+  
+  oled -> clearDisplay();  //effacer écran
+
+  while(!this->button_state()){
+    angle = this->poto(); 
+
+    oled -> firstPage();
+  
+    do {
+  
+      oled -> setFont(u8g2_font_ncenB10_tr);
+      oled -> drawStr(0,24,"Chiffre choisi :");
+      oled -> drawStr(0,60, String(chiffre).c_str());
+      
+      if(angle >= 0 && angle < 30){
+        chiffre = 0;
+        oled -> drawStr(0,60,String(chiffre).c_str());
+      }else if(angle >= 30 && angle < 60){
+        chiffre = 1;
+        oled -> drawStr(0,60,String(chiffre).c_str());
+      }else if(angle >= 60 && angle < 90){
+        chiffre = 2;
+        oled -> drawStr(0,60,String(chiffre).c_str());
+      }else if(angle >= 90 && angle < 120){
+        chiffre = 3;
+        oled -> drawStr(0,60,String(chiffre).c_str());
+      }else if(angle >= 120 && angle < 150){
+        chiffre = 4;
+        oled -> drawStr(0,60,String(chiffre).c_str());
+      }else if(angle >= 150 && angle < 180){
+        chiffre = 5;
+        oled -> drawStr(0,60,String(chiffre).c_str());
+      }else if(angle >= 180 && angle < 210){
+        chiffre = 6;
+        oled -> drawStr(0,60,String(chiffre).c_str());
+      }else if(angle >= 210 && angle < 240){
+        chiffre = 7;
+        oled -> drawStr(0,60,String(chiffre).c_str());
+      }else if(angle >= 240 && angle < 270){
+        chiffre = 8;
+        oled -> drawStr(0,60,String(chiffre).c_str());
+      }else if(angle >= 270 && angle < 300){
+        chiffre = 9;
+        oled -> drawStr(0,60,String(chiffre).c_str());
+      }
+    }while (oled -> nextPage());    
+  }
+}
+
+
+
 ////////////////////// POTO ////////////////////////////////
 
 float IHM :: poto(){

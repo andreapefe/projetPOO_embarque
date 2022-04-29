@@ -62,6 +62,8 @@ class IHM{
 
     void afficher_vitesse();  //afficher la vitesse à l'écran
 
+    int select_chiffre();  //pour modifier un chiffre de 0 à 9
+
     //POTENTIOMETRE
 
     float poto();
