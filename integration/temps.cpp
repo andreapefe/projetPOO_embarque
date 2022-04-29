@@ -28,3 +28,13 @@ void temps::afficher(){
   Serial.print(":");
   Serial.println(minutes);
 }
+
+bool & operator<(const temps t, const temps dt){
+  if (t.heures < dt.heures){
+    return true;
+  } else if (t.minutes < dt.minutes && t.heure == dt.heures){
+    return true;
+  } else {
+    return false;
+  }
+}

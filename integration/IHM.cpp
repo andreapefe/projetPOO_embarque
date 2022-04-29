@@ -210,18 +210,18 @@ void IHM :: page_resume_mode_autom(float temp_voulue, mode_nuit m){
     oled -> firstPage();
     do {
 
-      oled -> drawRFrame(50,90,70,50,0); //(x,y,largeur,hauteur,arrondi des angles) cadre cancel
-      oled -> drawStr(52,92,"CANCEL");  //bouton CANCEL pour retourner au menu initial
+      oled -> drawRFrame(21,85,70,41,0); //(x,y,largeur,hauteur,arrondi des angles) cadre cancel
+      oled -> drawStr(24,110,"CANCEL");  //bouton CANCEL pour retourner au menu initial
       
       oled -> setFont(u8g2_font_ncenB10_tr);
       oled -> drawStr(0,10,"Mode nuit :");
       if(m == Nuit_oui){
-        oled -> drawStr(0,20,"activé");
+        oled -> drawStr(0,30,"Actif");
       }else{
-        oled -> drawStr(0,20,"désactivé");
+        oled -> drawStr(0,30,"Inactif");
       }
-      oled -> drawStr(0,40,"Consigne :");
-      oled -> drawStr(0,50,String(temp_voulue).c_str());
+      oled -> drawStr(0,50,"Consigne :");
+      oled -> drawStr(0,70,String(temp_voulue).c_str());
     } while (oled -> nextPage());
    } 
 }
@@ -284,9 +284,9 @@ void IHM :: watch_speed(float vitesse){
   do {
     oled -> drawRFrame(0,60,100,10,0); //(x,y,largeur,hauteur,arrondi des angles) barre vitesse ventilateur
     oled -> drawStr(0,59,"0%");  //début de barre : vitesse min
-    oled -> drawStr(95,59,"100%");  //fin de barre : vitesse max
-    oled -> drawRFrame(50,90,70,50,0); //(x,y,largeur,hauteur,arrondi des angles) cadre cancel
-    oled -> drawStr(52,92,"CANCEL");  //bouton CANCEL pour retourner au menu initial
+    oled -> drawStr(90,59,"100%");  //fin de barre : vitesse max
+    oled -> drawRFrame(21,85,70,41,0); //(x,y,largeur,hauteur,arrondi des angles) cadre cancel
+    oled -> drawStr(24,110,"CANCEL");  //bouton CANCEL pour retourner au menu initial
 
     if( vitesse < 10){
       oled -> drawBox(0,60,10,10);

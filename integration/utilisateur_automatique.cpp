@@ -16,16 +16,18 @@ void Utilisateur_automatique::set_mode_nuit(mode_nuit m){
 void Utilisateur_automatique::lancer(IHM * maIHM, capteur_temp * cp, ventilateur * fan){
   //Prendre la configuration de la temperature voulue
   temp_voulue = maIHM->choix_temperature();
+  temps mtn;
 
   //Configuration mode nuit
   nuit = maIHM->choose_night_mode();
   if (nuit == Nuit_non){
     current_time = maIHM->choose_time();
     current_time -= now();
-   // current_time.afficher(current_time += now());
+    mtn += now();
   } else {
     //Boucle controle du ventilateur (Correcteur P)
   while(temp_voulue != cp->temperature()){
+    
     int erreur = (int)(cp->temperature()- temp_voulue);
     if (Gain*erreur < 100 && Gain*erreur > 0){
       fan->set_speed(Gain*erreur);
@@ -34,6 +36,7 @@ void Utilisateur_automatique::lancer(IHM * maIHM, capteur_temp * cp, ventilateur
     } else {
       fan->set_speed(100); //Saturation
     }
+    maIHM->page_resume_mode_autom(temp_voulue, nuit);
   }
   
   
