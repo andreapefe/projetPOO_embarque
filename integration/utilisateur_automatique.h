@@ -7,6 +7,7 @@
 #include "capteur_temp.h"
 #include "ventilateur.h"
 #include "definitions.h"
+#include <CurieTime.h>
 
 class Utilisateur_automatique : public Utilisateur {
   

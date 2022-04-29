@@ -10,5 +10,9 @@ void Utilisateur_automatique::afficherParametres(HardwareSerial * port){
 }
 
 void Utilisateur_automatique::lancer(IHM * maIHM, capteur_temp * cp, ventilateur * fan){
-  
+  //Prendre la configuration de la temperature
+  temp_voulue = maIHM->choix_temperature();
+
+  //Configuration finie donc affichage des configurations choisie
+  monIHM.afficher_temp(0.00);
 }
