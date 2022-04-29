@@ -5,14 +5,17 @@
 #define TAILLE_TABLEAU_TEMPS 4
 
 class temps{
-  
+public:
+  temps();
+
+  temps operator=(int * t);
+
+private:
   unsigned long heure;
   unsigned long minutes;
 
-  unsigned long
+  unsigned long secondes_total;
 
-  Temps operator=(int * t);
-  
-}
+};
 
 #endif
