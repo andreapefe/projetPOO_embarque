@@ -165,6 +165,7 @@ temps IHM :: choose_time(){
     Serial.println(tab[i]);
     
   }
+  selected_hour = tab;
   return selected_hour;
 }
 
@@ -281,19 +282,12 @@ mode_utilisation IHM :: config_mode(){
 void IHM :: watch_speed(float vitesse){
   oled -> firstPage();
   do {
-<<<<<<< HEAD
     oled -> drawRFrame(0,60,100,10,0); //(x,y,largeur,hauteur,arrondi des angles) barre vitesse ventilateur
     oled -> drawStr(0,59,"0%");  //début de barre : vitesse min
     oled -> drawStr(95,59,"100%");  //fin de barre : vitesse max
     oled -> drawRFrame(50,90,70,50,0); //(x,y,largeur,hauteur,arrondi des angles) cadre cancel
     oled -> drawStr(52,92,"CANCEL");  //bouton CANCEL pour retourner au menu initial
-=======
-    oled -> drawRFrame(0,60,100,10,0); //(x,y,largeur,hauteur,arrondi des angles) barre charge
-    oled -> drawRFrame(21,85,70,41,0); //(x,y,largeur,hauteur,arrondi des angles) cancel cadre
-    oled -> drawStr(0,59,"0%");  
-    oled -> drawStr(90,59,"100%"); 
-    oled -> drawStr(24,110,"CANCEL");  //bouton CANCEL pour retourner au menu initial
->>>>>>> 0350273e3b124b6a9836475ce8dae59af1302e2d
+
     if( vitesse < 10){
       oled -> drawBox(0,60,10,10);
     }else if(vitesse >= 10 && vitesse < 20){

@@ -14,15 +14,30 @@ void Utilisateur_automatique::set_mode_nuit(mode_nuit m){
 }
 
 void Utilisateur_automatique::lancer(IHM * maIHM, capteur_temp * cp, ventilateur * fan){
-  //Prendre la configuration de la temperature
+  //Prendre la configuration de la temperature voulue
   temp_voulue = maIHM->choix_temperature();
 
-  current_time = maIHM->choose_time();
   //Configuration mode nuit
-  set_mode_nuit(maIHM->choose_night_mode());
+  nuit = maIHM->choose_night_mode();
+  if (nuit == Nuit_non){
+    current_time = maIHM->choose_time();
+    current_time -= now();
+   // current_time.afficher(current_time += now());
+  } else {
+    //Boucle controle du ventilateur (Correcteur P)
+  while(temp_voulue != cp->temperature()){
+    int erreur = (int)(cp->temperature()- temp_voulue);
+    if (Gain*erreur < 100 && Gain*erreur > 0){
+      fan->set_speed(Gain*erreur);
+    } else if (Gain*erreur < 0){
+      fan->set_speed(0); //On ne peut pas rechauffer avec un ventilateur
+    } else {
+      fan->set_speed(100); //Saturation
+    }
+  }
   
-  //Boucle controle du ventilateur
   
+  }
   
   //Configuration finie donc affichage des configurations choisie
   //monIHM.afficher_temp(0.00);

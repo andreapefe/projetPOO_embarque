@@ -10,6 +10,8 @@
 #include "temps.h"
 #include <CurieTime.h>
 
+#define Gain 15
+
 class Utilisateur_automatique : public Utilisateur {
   
 public:
