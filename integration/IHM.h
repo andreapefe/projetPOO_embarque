@@ -66,6 +66,8 @@ class IHM{
 
     temps choose_time(); //utilisateur choisit l'heure
 
+    mode_nuit choose_night_mode();  //utilisateur choisit mode nuit ou pas
+    
     //POTENTIOMETRE
 
     float poto();

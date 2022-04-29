@@ -155,7 +155,7 @@ int IHM :: select_chiffre(int i, int * t){
 temps IHM :: choose_time(){
 
   int chiffre =0;
-  int tab[4] = {0, 0 ,0 , 0};
+  int tab[TAILLE_TABLEAU_TEMPS] = {0, 0 ,0 , 0};
   temps selected_hour;
   
   oled -> clearDisplay();  //effacer écran
@@ -170,6 +170,36 @@ temps IHM :: choose_time(){
   return selected_hour;
 }
 
+mode_nuit IHM :: choose_night_mode(){
+
+oled -> clearDisplay();  //effacer écran
+
+   float angle  = get_speed(); //récupérer valeur potentiomètre
+
+   while(!this->button_state()){
+    angle = this -> poto(); //récupérer valeur potentiomètre
+
+    oled -> firstPage();
+    do {
+      oled -> setFont(u8g2_font_ncenB10_tr);
+      oled -> drawStr(10,25,"Activer mode nuit ?");
+      oled -> drawStr(10,60,"OUI");
+      oled -> drawStr(10,100,"NON");
+      if(angle < 150){                //en haut
+        oled -> drawHLine(10,62,50); //ligne horizontale (x,y,longueur) qui souligne OUI
+      }else{                          //en bas
+        oled -> drawHLine(10,102,50);  //ligne horizontale (x,y,longueur) qui souligne NON
+      }
+    } while (oled -> nextPage());
+
+   }
+   if (angle < 150){
+      return Nuit_oui;
+   } else {
+    return Nuit_non;
+   }
+   oled -> clearDisplay();
+}
 
 
 ////////////////////// POTO ////////////////////////////////
