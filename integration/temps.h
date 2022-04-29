@@ -4,11 +4,13 @@
 //Pour affichage simple température
 #define TAILLE_TABLEAU_TEMPS 4
 
+#include <stdexcept>
+
 class temps{
 public:
   temps();
 
-  temps operator=(int * t);
+  temps & operator=(const int * t);
 
 private:
   unsigned long heure;
