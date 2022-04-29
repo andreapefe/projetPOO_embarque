@@ -86,7 +86,7 @@ void IHM :: afficher_temp(float temp){
     } while (oled -> nextPage());
 }
 
-int IHM :: select_chiffre(){
+int IHM :: select_chiffre(int i){
 
   int chiffre = 0;
   float angle = this->poto(); //récupérer valeur potentiomètre
@@ -106,37 +106,70 @@ int IHM :: select_chiffre(){
       
       if(angle >= 0 && angle < 30){
         chiffre = 0;
-        oled -> drawStr(0,60,String(chiffre).c_str());
+        oled -> drawStr(10*i,60,String(chiffre).c_str());
       }else if(angle >= 30 && angle < 60){
         chiffre = 1;
-        oled -> drawStr(0,60,String(chiffre).c_str());
+        oled -> drawStr(10*i,60,String(chiffre).c_str());
       }else if(angle >= 60 && angle < 90){
         chiffre = 2;
-        oled -> drawStr(0,60,String(chiffre).c_str());
+        oled -> drawStr(10*i,60,String(chiffre).c_str());
       }else if(angle >= 90 && angle < 120){
         chiffre = 3;
-        oled -> drawStr(0,60,String(chiffre).c_str());
+        oled -> drawStr(10*i,60,String(chiffre).c_str());
       }else if(angle >= 120 && angle < 150){
         chiffre = 4;
-        oled -> drawStr(0,60,String(chiffre).c_str());
+        oled -> drawStr(10*i,60,String(chiffre).c_str());
       }else if(angle >= 150 && angle < 180){
         chiffre = 5;
-        oled -> drawStr(0,60,String(chiffre).c_str());
+        oled -> drawStr(10*i,60,String(chiffre).c_str());
       }else if(angle >= 180 && angle < 210){
         chiffre = 6;
-        oled -> drawStr(0,60,String(chiffre).c_str());
+        oled -> drawStr(10*i,60,String(chiffre).c_str());
       }else if(angle >= 210 && angle < 240){
         chiffre = 7;
-        oled -> drawStr(0,60,String(chiffre).c_str());
+        oled -> drawStr(10*i,60,String(chiffre).c_str());
       }else if(angle >= 240 && angle < 270){
         chiffre = 8;
-        oled -> drawStr(0,60,String(chiffre).c_str());
+        oled -> drawStr(10*i,60,String(chiffre).c_str());
       }else if(angle >= 270 && angle < 300){
         chiffre = 9;
-        oled -> drawStr(0,60,String(chiffre).c_str());
+        oled -> drawStr(10*i,60,String(chiffre).c_str());
       }
     }while (oled -> nextPage());    
   }
+}
+
+temps IHM :: choose_time(){
+
+  int chiffre =0;
+  int tab[4];
+  temps selected_hour;
+  
+  oled -> clearDisplay();  //effacer écran
+
+  for(int i=0; i<4; i++){
+    
+    tab[i] = select_chiffre(i);
+    
+    while(!this->button_state()){
+      //angle = this->poto(); 
+  
+      oled -> firstPage();
+    
+      do {
+    
+        oled -> setFont(u8g2_font_ncenB10_tr);
+        oled -> drawStr(0,24,"Heure :");
+        oled -> drawStr(0,60, String(chiffre).c_str());
+        oled -> drawStr(10,60, String(chiffre).c_str());
+        oled -> drawStr(20,60, ":");
+        oled -> drawStr(30,60, String(chiffre).c_str());
+        oled -> drawStr(40,60, String(chiffre).c_str());
+        
+      }while (oled -> nextPage());    
+    }
+  }
+  return selected_hour;
 }
 
 
