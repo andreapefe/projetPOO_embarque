@@ -162,7 +162,7 @@ temps IHM :: choose_time(){
     
     tab[i] = select_chiffre(i, tab);
     delay(500);
-    Serial.println(tab[i]);
+    //Serial.println(tab[i]);
     
   }
   selected_hour = tab;
@@ -201,11 +201,12 @@ oled -> clearDisplay();  //effacer écran
    oled -> clearDisplay();
 }
 
+void IHM::effacer_oled(){
+  oled -> clearDisplay();
+}
+
+
 void IHM :: page_resume_mode_autom(float temp_voulue, mode_nuit m){
-
-   oled -> clearDisplay();  //effacer écran
-
-   while(!this->button_state()){
 
     oled -> firstPage();
     do {
@@ -223,7 +224,6 @@ void IHM :: page_resume_mode_autom(float temp_voulue, mode_nuit m){
       oled -> drawStr(0,50,"Consigne :");
       oled -> drawStr(0,70,String(temp_voulue).c_str());
     } while (oled -> nextPage());
-   } 
 }
 
 
@@ -335,13 +335,13 @@ void IHM :: led_change_couleur(float temp){
 
   float temperature = temp;
 
-  if( temperature > 0 && temperature < 18){
+  if( temperature > 0 && temperature < 22){
       allumer_bleu();
-  }else if(temperature >= 18 && temperature < 25){
+  }else if(temperature >= 22 && temperature < 27){
       allumer_orange();
-  }else if(temperature >= 25 && temperature < 29){
+  }else if(temperature >= 27 && temperature < 33){
       allumer_rouge();
-  }else if(temperature > 29){
+  }else if(temperature > 33){
       allumer_rouge_intense();    
   }
 }

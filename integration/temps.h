@@ -11,6 +11,8 @@ class temps{
 public:
   temps();
 
+  temps(unsigned long h, unsigned long m);
+
   void afficher();
 
   temps & operator=(const int * t);
@@ -19,9 +21,12 @@ public:
 
   temps & operator+=(const unsigned long s);
 
-private:
   unsigned long heure;
   unsigned long minutes;
 };
+
+bool operator<(temps t, temps dt);
+
+temps & operator+(temps t, const unsigned long dt);
 
 #endif

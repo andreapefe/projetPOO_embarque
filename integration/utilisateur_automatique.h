@@ -31,6 +31,7 @@ public:
 private:
 //Attributs
   temps current_time;
+  unsigned long int offset_now;
   float temp_voulue;
   mode_nuit nuit;
 };

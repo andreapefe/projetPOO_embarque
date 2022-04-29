@@ -69,6 +69,8 @@ class IHM{
 
     mode_nuit choose_night_mode();  //utilisateur choisit mode nuit pas
 
+    void effacer_oled();
+
     void page_resume_mode_autom(float temp_voulue, mode_nuit m); //resume les specifications du mode automatique choisies par l'utilisateur
     
     //POTENTIOMETRE

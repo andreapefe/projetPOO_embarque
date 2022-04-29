@@ -39,10 +39,7 @@ void loop() {
       Utilisateur_automatique * userA = (Utilisateur_automatique *) new Utilisateur_automatique;
       user = userA;      
     }
-
-  while(1){
     user->lancer(&monIHM, &cp, &vent);
-  }
-   
-  
+    vent.set_speed(0);
+    monIHM.eteindre();
 }
