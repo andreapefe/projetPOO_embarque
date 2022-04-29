@@ -30,19 +30,22 @@ void Utilisateur_automatique::lancer(IHM * maIHM, capteur_temp * cp, ventilateur
 
     //Pour calculer le vrai temps
     temps mtn;
+    unsigned long int offset = now() - offset_now;
+    mtn = current_time + offset;
     
     temps temps_limite(20,0); //À partir de 20h le ventilateur s'éteint
+    temps temps_limite_bas(9,0); //Avant 9h ne fonctionne pas
     delay(100);
     maIHM->page_resume_mode_autom(temp_voulue, nuit);
     
     //Boucle controle du ventilateur (Correcteur P) quand le ventilateur s'éteint la nuit
-    while(mtn < temps_limite && !maIHM->button_state()){
+    while(mtn < temps_limite && !(maIHM->button_state()) && !(mtn<temps_limite_bas)){
       //Récupérer température pour erreur
       float temp_act = cp->temperature();
       int erreur = (int)(temp_act - temp_voulue);
       
       // Récupérer heure actuelle
-      unsigned long int offset = now() - offset_now;
+      offset = now() - offset_now;
       mtn = current_time + offset;
       Serial.print("nOW = ");
       Serial.println(offset_now);
