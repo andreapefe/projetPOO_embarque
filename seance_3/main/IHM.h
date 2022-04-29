@@ -48,6 +48,7 @@ class IHM{
     void allumer_vert();  //allume la LED en vert
     void allumer_bleu();  //allume la LED en bleu
     void allumer_orange();  //allume la LED en orange
+    void allumer_rouge_intense(); //allume la LED en rouge intense
     void eteindre();  //eteindre la LED
     void attendre_2s(); //délais de 2s
     void attendre_1s(); //délais de 1s
@@ -76,6 +77,10 @@ class IHM{
     //BOUTON POUSSOIR
 
     bool button_state(); //retourne l'état du bouton poussoir
+
+    //LED + TEMPERATURE
+
+    void change_color_temp(float temp); //modifie la couleur de la rgb en fonction de la température
     
 };
 

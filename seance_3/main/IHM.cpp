@@ -32,8 +32,12 @@ void IHM :: allumer_bleu(){
 }
 
 void IHM :: allumer_orange(){
-  rgb->setColorHSL(0,15,20,50);
   rgb->setColorRGB(0,255,140,0);
+}
+
+void IHM :: allumer_rouge_intense(){
+  rgb->setColorRGB(0,253,0,0);
+  rgb->setColorHSL(0,1.0,1.0,1.0);
 }
 
 void IHM :: eteindre(){
@@ -169,4 +173,21 @@ bool IHM :: button_state(){
   }
   //delay(1);
   return state;
+}
+
+////////////////////// LED change couleur en fonction temp ////////////////////////////////
+
+void IHM :: change_color_temp(float temp){
+
+  temperature = temp;
+
+  if(temperature >= 18 && temperature < 23){
+      allumer_bleu();
+    }else if(temperature >= 23 && temperature < 26){
+      allumer_orange;
+    }else if(temperature >= 26 && temperature < 30){
+      allumer_rouge();
+    }else if(temperature > 30){
+      allumer_rouge_intense();
+  
 }
