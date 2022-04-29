@@ -67,7 +67,9 @@ class IHM{
 
     temps choose_time(); //utilisateur choisit l'heure
 
-    mode_nuit choose_night_mode();  //utilisateur choisit mode nuit ou pas
+    mode_nuit choose_night_mode();  //utilisateur choisit mode nuit pas
+
+    void page_resume_mode_autom(float temp_voulue, mode_nuit m); //resume les specifications du mode automatique choisies par l'utilisateur
     
     //POTENTIOMETRE
 

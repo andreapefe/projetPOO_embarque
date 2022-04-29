@@ -64,7 +64,6 @@ void IHM :: afficher(u8g2_uint_t x, u8g2_uint_t y, const char* var){
 }
 
 void IHM :: welcome_page(){
-  float angle = this -> poto();
   
   oled -> firstPage();
   do {
@@ -154,7 +153,6 @@ int IHM :: select_chiffre(int i, int * t){
 
 temps IHM :: choose_time(){
 
-  int chiffre =0;
   int tab[TAILLE_TABLEAU_TEMPS] = {0, 0 ,0 , 0};
   temps selected_hour;
   
@@ -201,6 +199,32 @@ oled -> clearDisplay();  //effacer écran
    }
    oled -> clearDisplay();
 }
+
+void IHM :: page_resume_mode_autom(float temp_voulue, mode_nuit m){
+
+   oled -> clearDisplay();  //effacer écran
+
+   while(!this->button_state()){
+
+    oled -> firstPage();
+    do {
+
+      oled -> drawRFrame(50,90,70,50,0); //(x,y,largeur,hauteur,arrondi des angles) cadre cancel
+      oled -> drawStr(52,92,"CANCEL");  //bouton CANCEL pour retourner au menu initial
+      
+      oled -> setFont(u8g2_font_ncenB10_tr);
+      oled -> drawStr(0,10,"Mode nuit :");
+      if(m == Nuit_oui){
+        oled -> drawStr(0,20,"activé");
+      }else{
+        oled -> drawStr(0,20,"désactivé");
+      }
+      oled -> drawStr(0,40,"Consigne :");
+      oled -> drawStr(0,50,String(temp_voulue).c_str());
+    } while (oled -> nextPage());
+   } 
+}
+
 
 
 ////////////////////// POTO ////////////////////////////////
@@ -257,10 +281,10 @@ mode_utilisation IHM :: config_mode(){
 void IHM :: watch_speed(float vitesse){
   oled -> firstPage();
   do {
-    oled -> drawRFrame(0,60,100,10,0); //(x,y,largeur,hauteur,arrondi des angles)
-    oled -> drawRFrame(50,90,70,50,0); //(x,y,largeur,hauteur,arrondi des angles)
-    oled -> drawStr(0,59,"0%");  //bouton CANCEL pour retourner au menu initial
-    oled -> drawStr(95,59,"100%");  //bouton CANCEL pour retourner au menu initial
+    oled -> drawRFrame(0,60,100,10,0); //(x,y,largeur,hauteur,arrondi des angles) barre vitesse ventilateur
+    oled -> drawStr(0,59,"0%");  //début de barre : vitesse min
+    oled -> drawStr(95,59,"100%");  //fin de barre : vitesse max
+    oled -> drawRFrame(50,90,70,50,0); //(x,y,largeur,hauteur,arrondi des angles) cadre cancel
     oled -> drawStr(52,92,"CANCEL");  //bouton CANCEL pour retourner au menu initial
     if( vitesse < 10){
       oled -> drawBox(0,60,10,10);
