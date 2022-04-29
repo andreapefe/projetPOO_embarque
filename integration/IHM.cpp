@@ -24,10 +24,6 @@ void IHM :: allumer_rouge(){
   rgb->setColorRGB(0,253,0,0);
 }
 
-void IHM :: allumer_vert(){
-  rgb->setColorRGB(0,0,253,0);
-}
-
 void IHM :: allumer_bleu(){
   rgb->setColorRGB(0,0,0,253);
 }
@@ -45,23 +41,7 @@ void IHM :: eteindre(){
   rgb->setColorRGB(0,0,0,0);
 }
 
-void IHM :: attendre_2s(){
-  delay(2000);
-}
-
-void IHM :: attendre_1s(){
-  delay(1000);
-}
-
 ////////////////////// OLED ////////////////////////////////
-
-void IHM :: afficher(u8g2_uint_t x, u8g2_uint_t y, const char* var){
-  oled -> firstPage();
-  do {
-    oled -> setFont(u8g2_font_ncenB10_tr);
-    oled -> drawStr(x,y,var);
-  } while (oled -> nextPage());
-}
 
 void IHM :: welcome_page(){
   
@@ -74,24 +54,15 @@ void IHM :: welcome_page(){
 }
 
 
-
-void IHM :: afficher_temp(float temp){
-  oled -> firstPage();
-    do {
-      oled -> setFont(u8g2_font_ncenB10_tr);
-      oled -> drawStr(50,50,String(temp).c_str());
-    } while (oled -> nextPage());
-}
-
 int IHM :: select_chiffre(int i, int * t){
 
   int chiffre = 0;
-  float angle = this->poto(); //récupérer valeur potentiomètre
+  float angle = get_speed(); //récupérer valeur potentiomètre
 
   oled -> clearDisplay();
   
   while(!this->button_state()){
-    angle = this->poto(); 
+    angle = get_speed(); 
     
     oled -> firstPage();
     do {
@@ -176,7 +147,7 @@ oled -> clearDisplay();  //effacer écran
    float angle  = get_speed(); //récupérer valeur potentiomètre
 
    while(!this->button_state()){
-    angle = this -> poto(); //récupérer valeur potentiomètre
+    angle = this -> get_speed(); //récupérer valeur potentiomètre
 
     oled -> firstPage();
     do {
@@ -230,7 +201,7 @@ void IHM :: page_resume_mode_autom(float temp_voulue, mode_nuit m){
 
 ////////////////////// POTO ////////////////////////////////
 
-float IHM :: poto(){
+float IHM :: get_speed(){
   
   float voltage;
   int sensor_value = analogRead(ROTARY_ANGLE_SENSOR);
@@ -242,20 +213,15 @@ float IHM :: poto(){
   return degrees;
 }
 
-float IHM :: get_speed(){
-  return this -> poto();
-}
-
-
 ////////////////////// POTO + OLED ////////////////////////////////
 
 mode_utilisation IHM :: config_mode(){
    oled -> clearDisplay();  //effacer écran
 
-   float angle = this->poto(); //récupérer valeur potentiomètre
+   float angle = get_speed(); //récupérer valeur potentiomètre
 
    while(!this->button_state()){
-    angle = this -> poto(); //récupérer valeur potentiomètre
+    angle = this -> get_speed(); //récupérer valeur potentiomètre
 
     oled -> firstPage();
     do {
@@ -352,12 +318,12 @@ void IHM :: led_change_couleur(float temp){
 float IHM :: choix_temperature(){
 
   float temp = 20.0;
-  float angle = this->poto(); //récupérer valeur potentiomètre
+  float angle = get_speed(); //récupérer valeur potentiomètre
   
   oled -> clearDisplay();  //effacer écran
 
   while(!this->button_state()){
-    angle = this->poto(); 
+    angle = this->get_speed(); 
 
     oled -> firstPage();
   
