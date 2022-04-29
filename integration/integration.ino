@@ -32,6 +32,7 @@ void loop() {
     }else {
       //monIHM.afficher_temp(0.00);
       monIHM.choix_temperature();
+      monIHM.select_chiffre();
     }
 
   while(1){

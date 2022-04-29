@@ -26,7 +26,7 @@ private:
 //Attributs
   temps current_time;
   float temp_voulue;
-}
+};
 
 
 #endif
