@@ -23,11 +23,14 @@ public:
 
   void lancer(IHM * maIHM, capteur_temp * cp, ventilateur * fan);
 
+  void set_mode_nuit(mode_nuit m);
+
 
 private:
 //Attributs
   temps current_time;
   float temp_voulue;
+  mode_nuit nuit;
 };
 
 

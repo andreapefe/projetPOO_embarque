@@ -26,7 +26,7 @@ void loop() {
    // Serial.println("Hola");
    // monIHM.allumer_bleu();
     monIHM.welcome_page();
-    delay(1000);
+    delay(2000);
     modo = monIHM.config_mode();
    
 

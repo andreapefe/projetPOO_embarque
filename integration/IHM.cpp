@@ -69,8 +69,8 @@ void IHM :: welcome_page(){
   oled -> firstPage();
   do {
     oled -> setFont(u8g2_font_ncenB10_tr);
-    oled -> drawStr(0,24,"BONJOUR");
-    oled -> drawStr(0,50,"SELECT MODE :");
+    oled -> drawStr(0,24,"BIENVENUE");
+    oled -> drawStr(0,50,"iFAN v1.0");
   } while (oled -> nextPage());
 }
 
@@ -182,13 +182,14 @@ oled -> clearDisplay();  //effacer écran
     oled -> firstPage();
     do {
       oled -> setFont(u8g2_font_ncenB10_tr);
-      oled -> drawStr(10,25,"Activer mode nuit ?");
-      oled -> drawStr(10,60,"OUI");
-      oled -> drawStr(10,100,"NON");
+      oled -> drawStr(10,25,"Activer mode");
+      oled -> drawStr(10,40, "nuit ?");
+      oled -> drawStr(10,70,"OUI");
+      oled -> drawStr(10,95,"NON");
       if(angle < 150){                //en haut
-        oled -> drawHLine(10,62,50); //ligne horizontale (x,y,longueur) qui souligne OUI
+        oled -> drawHLine(10,72,35); //ligne horizontale (x,y,longueur) qui souligne OUI
       }else{                          //en bas
-        oled -> drawHLine(10,102,50);  //ligne horizontale (x,y,longueur) qui souligne NON
+        oled -> drawHLine(10,97,35);  //ligne horizontale (x,y,longueur) qui souligne NON
       }
     } while (oled -> nextPage());
 
@@ -234,12 +235,13 @@ mode_utilisation IHM :: config_mode(){
     oled -> firstPage();
     do {
       oled -> setFont(u8g2_font_ncenB10_tr);
-      oled -> drawStr(10,25,"Automatique");
-      oled -> drawStr(10,80,"Manuel");
+      oled -> drawStr(10,25,"Select mode :");
+      oled -> drawStr(10,70,"Automatique");
+      oled -> drawStr(10,100,"Manuel");
       if(angle < 150){                //en haut
-        oled -> drawHLine(10,26,100); //ligne horizontale (x,y,longueur) qui souligne mode automatique
+        oled -> drawHLine(10,71,100); //ligne horizontale (x,y,longueur) qui souligne mode automatique
       }else{                          //en bas
-        oled -> drawHLine(10,81,55);  //ligne horizontale (x,y,longueur) qui souligne mode manuel
+        oled -> drawHLine(10,101,55);  //ligne horizontale (x,y,longueur) qui souligne mode manuel
       }
     } while (oled -> nextPage());
 
