@@ -53,8 +53,6 @@ class IHM{
     void attendre_2s(); //délais de 2s
     void attendre_1s(); //délais de 1s
 
-    void change_color(float temp); //modifie la couleur de LED en fonction de la température
-
     //OLED
 
     void welcome_page();  //affichage écran accueil
@@ -80,8 +78,13 @@ class IHM{
 
     bool button_state(); //retourne l'état du bouton poussoir
 
+    //LED changement couleur
+
     void led_change_couleur(float temp);  //change couleur led en fonction de la temp
-    
+
+    //CHOIX DE TEMPERATURE AVEC POTO
+
+    float choix_temperature();  //choix de la température par l'utilisateur
 };
 
 #endif

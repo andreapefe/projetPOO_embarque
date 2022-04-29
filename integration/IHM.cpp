@@ -53,17 +53,6 @@ void IHM :: attendre_1s(){
   delay(1000);
 }
 
-void IHM :: change_color(float temp){   //à tester avec le cpateur
-  if(temp >= 20 && temp < 22){
-    this -> allumer_bleu();
-  }else if(temp >= 22 && temp < 24){
-    this -> allumer_orange();
-  }else if(temp >= 24){
-    this -> allumer_rouge();
-  }
-}
-
-
 ////////////////////// OLED ////////////////////////////////
 
 void IHM :: afficher(u8g2_uint_t x, u8g2_uint_t y, const char* var){
@@ -95,12 +84,6 @@ void IHM :: afficher_temp(float temp){
       oled -> setFont(u8g2_font_ncenB10_tr);
       oled -> drawStr(50,50,String(temp).c_str());
     } while (oled -> nextPage());
-}
-
-
-void IHM :: afficher_vitesse(){
-  float angle = this -> poto();
-
 }
 
 ////////////////////// POTO ////////////////////////////////
@@ -213,4 +196,75 @@ void IHM :: led_change_couleur(float temp){
   }else if(temperature > 29){
       allumer_rouge_intense();    
   }
+}
+
+
+/////////////  CHOIX DE TEMPERATURE AVEC POTO /////////////////////
+
+float IHM :: choix_temperature(){
+
+  float temp = 20.0;
+  
+  oled -> clearDisplay();  //effacer écran
+  float angle = this->poto(); //récupérer valeur potentiomètre
+  
+  oled -> firstPage();
+  
+  do {
+
+    oled -> setFont(u8g2_font_ncenB10_tr);
+    oled -> drawStr(0,24,"choisissez la temperature :");
+    oled -> drawStr(0,50,String(temp).c_str());
+    oled -> drawStr(0,60,"°C ");
+    
+    if(angle >= 0 && angle < 20){
+      temp = 20.0;
+      oled -> drawStr(0,50,String(temp).c_str());
+    }else if(angle >= 20 && angle < 40){
+      temp = 21.0;
+      oled -> drawStr(0,50,String(temp).c_str());
+    }else if(angle >= 40 && angle < 60){
+      temp = 22.0;
+      oled -> drawStr(0,50,String(temp).c_str());
+    }else if(angle >= 60 && angle < 80){
+      temp = 23.0;
+      oled -> drawStr(0,50,String(temp).c_str());
+    }else if(angle >= 80 && angle < 100){
+      temp = 24.0;
+      oled -> drawStr(0,50,String(temp).c_str());
+    }else if(angle >= 100 && angle < 120){
+      temp = 25.0;
+      oled -> drawStr(0,50,String(temp).c_str());
+    }else if(angle >= 120 && angle < 140){
+      temp = 26.0;
+      oled -> drawStr(0,50,String(temp).c_str());
+    }else if(angle >= 140 && angle < 160){
+      temp = 27.0;
+      oled -> drawStr(0,50,String(temp).c_str());
+    }else if(angle >= 160 && angle < 180){
+      temp = 28.0;
+      oled -> drawStr(0,50,String(temp).c_str());
+    }else if(angle >= 180 && angle < 200){
+      temp = 29.0;
+      oled -> drawStr(0,50,String(temp).c_str());
+    }else if(angle >= 200 && angle < 220){
+      temp = 30.0;
+      oled -> drawStr(0,50,String(temp).c_str());
+    }else if(angle >= 220 && angle < 240){
+      temp = 31.0;
+      oled -> drawStr(0,50,String(temp).c_str());
+    }else if(angle >= 240 && angle < 260){
+      temp = 32.0;
+      oled -> drawStr(0,50,String(temp).c_str());
+    }else if(angle >= 260 && angle < 280){
+      temp = 33.0;
+      oled -> drawStr(0,50,String(temp).c_str());
+    }else if(angle >= 280 && angle < 300){
+      temp = 34.0;
+      oled -> drawStr(0,50,String(temp).c_str());
+    }else if(angle = 300){
+      temp = 35.0;
+      oled -> drawStr(0,50,String(temp).c_str());
+    }
+  }while (oled -> nextPage());
 }
