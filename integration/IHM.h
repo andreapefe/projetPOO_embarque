@@ -46,22 +46,14 @@ class IHM{
     //LED RGB
 
     void allumer_rouge(); //allume la LED en rouge
-    void allumer_vert();  //allume la LED en vert
     void allumer_bleu();  //allume la LED en bleu
     void allumer_orange();  //allume la LED en orange
-    void allumer_rouge_intense(); //allume la LED en rouge intense
+    void allumer_rouge_intense(); //la LED clignote en rouge
     void eteindre();  //eteindre la LED
-    void attendre_2s(); //délais de 2s
-    void attendre_1s(); //délais de 1s
 
     //OLED
 
     void welcome_page();  //affichage écran accueil
-
-    void afficher(u8g2_uint_t x, u8g2_uint_t y, const char* var);  //affichage de "var" à l'écran en (x,y)
-    void afficher_temp(float temp);  //afficher la température
-
-    void afficher_vitesse();  //afficher la vitesse à l'écran
 
     int select_chiffre(int i, int * t);  //pour modifier un chiffre de 0 à 9
 
@@ -75,7 +67,6 @@ class IHM{
     
     //POTENTIOMETRE
 
-    float poto();
     float get_speed();  //retourne la vitesse du poto
 
     //POTO + OLED
