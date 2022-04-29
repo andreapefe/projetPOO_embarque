@@ -4,6 +4,7 @@
 #include "definitions.h"
 #include "capteur_temp.h"
 #include "utilisateur_automatique.h"
+#include "temps.h"
 
 IHM monIHM;
 Utilisateur * user;

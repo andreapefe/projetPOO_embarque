@@ -4,7 +4,7 @@
 //Pour affichage simple température
 #define TAILLE_TABLEAU_TEMPS 4
 
-class Temps{
+class temps{
   
   unsigned long heure;
   unsigned long minutes;

@@ -6,6 +6,7 @@
 #include "definitions.h"
 #include "capteur_temp.h"
 #include "ventilateur.h"
+#include "temps.h"
 
 class Utilisateur{
 public:
