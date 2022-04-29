@@ -62,7 +62,7 @@ class IHM{
 
     void afficher_vitesse();  //afficher la vitesse à l'écran
 
-    int select_chiffre(int i);  //pour modifier un chiffre de 0 à 9
+    int select_chiffre(int i, int * t);  //pour modifier un chiffre de 0 à 9
 
     temps choose_time(); //utilisateur choisit l'heure
 

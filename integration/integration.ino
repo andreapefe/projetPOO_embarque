@@ -3,6 +3,7 @@
 #include "utilisateur_manuel.h"
 #include "definitions.h"
 #include "capteur_temp.h"
+#include "utilisateur_automatique.h"
 
 IHM monIHM;
 Utilisateur * user;
@@ -24,6 +25,7 @@ void loop() {
    // Serial.println("Hola");
    // monIHM.allumer_bleu();
     monIHM.welcome_page();
+    delay(1000);
     modo = monIHM.config_mode();
    
 
@@ -32,8 +34,8 @@ void loop() {
      user = userM;
     }else {
       //
-      monIHM.select_chiffre();
-      Utilisateur_automatique * userA = (Utilsateur_automatique *) new Utilisateur_automatique;
+      //monIHM.select_chiffre();
+      Utilisateur_automatique * userA = (Utilisateur_automatique *) new Utilisateur_automatique;
       user = userA;      
     }
 
