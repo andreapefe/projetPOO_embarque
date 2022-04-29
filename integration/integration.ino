@@ -30,10 +30,8 @@ void loop() {
      Utilisateur_manuel * userM = (Utilisateur_manuel *) new Utilisateur_manuel;
      user = userM;
     }else {
-      monIHM.afficher_temp(0.00);
-      while(1){
-         monIHM.choix_temperature();
-      } 
+      //monIHM.afficher_temp(0.00);
+      monIHM.choix_temperature();
     }
 
   while(1){
