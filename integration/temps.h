@@ -15,7 +15,7 @@ public:
 
   void afficher();
 
-  temps & operator=(const int * t);
+  temps & operator=(const int * t) throw (std::range_error); //Range errors : result of the computation cannot be represented by the destination type temps. (heure > 24)
 
   temps & operator-=(const unsigned long s);
 

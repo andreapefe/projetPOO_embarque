@@ -10,9 +10,15 @@ temps::temps(unsigned long h, unsigned long m){
   minutes = m;
 }
 
-temps & temps::operator=(const int * t){
-  this->heure = 10*t[0]+t[1];
-  this->minutes = 10*t[2]+t[3];
+temps & temps::operator=(const int * t)throw (std::range_error){
+  if((t[0]*10 + t[1]) > 23 ){
+    throw std::range_error("Plus 24h"); //More than 23 hours
+  } else if ((10*t[2]+t[3]) > 59){
+    throw std::range_error("Plus de 60m"); //More than 59 minutes
+  } else {
+    this->heure = 10*t[0]+t[1];
+    this->minutes = 10*t[2]+t[3];
+  }
   return *this; 
 }
 
