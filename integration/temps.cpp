@@ -10,9 +10,9 @@ temps::temps(unsigned long h, unsigned long m){
   minutes = m;
 }
 
-temps & temps::operator=(const int * t){
-  this->heure = 10*t[0]+t[1];
-  this->minutes = 10*t[2]+t[3];
+temps & temps::operator=(std::array<int,TAILLE_TABLEAU_TEMPS>& t){
+  this->heure = 10*t.at(0)+t.at(1);
+  this->minutes = 10*t.at(2)+t.at(3);
   return *this; 
 }
 
@@ -50,19 +50,27 @@ bool operator<(temps t, temps dt){
 
 temps & operator+(temps t, const unsigned long dt){
   Serial.println(dt);
-  Serial.println(dt/3600);
+  //Serial.println(dt/3600);
   int h_rest = dt/3600;
   t.heure = (t.heure + h_rest); //rajoute les heures directes
-  // Vérfiie les minutes à rajouter
+  //Vérfiie les minutes à rajouter
   int m_rest = (dt - h_rest*3600) / 60;
-  Serial.println(m_rest);
+  //Serial.println(m_rest);
   if (t.minutes + m_rest >= 60){
     t.heure += 1;
     t.minutes = (t.minutes + m_rest) % 60;
   } else {
     t.minutes = (t.minutes + m_rest);
   }
-  Serial.println(t.minutes);
+  //Serial.println(t.minutes);
   t.heure = t.heure % 24;
   return t;
+}
+
+bool temps::verfifier_validite(){
+  if (heure > 23 || minutes > 59){
+    return false;
+  } else {
+    return true;
+  }
 }

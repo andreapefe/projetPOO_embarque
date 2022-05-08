@@ -34,7 +34,6 @@ void IHM :: allumer_orange(){
 
 void IHM :: allumer_rouge_intense(){
   rgb->setColorRGB(0,253,0,0);
-  rgb->setColorHSL(0,1,1,1);
 }
 
 void IHM :: eteindre(){
@@ -54,7 +53,7 @@ void IHM :: welcome_page(){
 }
 
 
-int IHM :: select_chiffre(int i, int * t){
+int IHM :: select_chiffre(int i, std::array<int, 4>& t){
 
   int chiffre = 0;
   float angle = get_speed(); //récupérer valeur potentiomètre
@@ -124,20 +123,42 @@ int IHM :: select_chiffre(int i, int * t){
 
 temps IHM :: choose_time(){
 
-  int tab[TAILLE_TABLEAU_TEMPS] = {0, 0 ,0 , 0};
+  std::array<int, TAILLE_TABLEAU_TEMPS> tab;
+  tab.fill(0);
+  
+  bool heure_valide = false;
   temps selected_hour;
   
   oled -> clearDisplay();  //effacer écran
-
-  for(int i=0; i<4; i++){
+  //Tant que l'heure n'est pas valide on continue à demander l'heure
+  while(!heure_valide){
     
-    tab[i] = select_chiffre(i, tab);
-    delay(500);
+    for(int i=0; i<tab.size(); i++){
+      tab[i] = select_chiffre(i, tab);
+      delay(500);
     //Serial.println(tab[i]);
+    }
+    
+    selected_hour = tab;
+
+    if (selected_hour.verfifier_validite()){
+      heure_valide = true;
+    } else {
+      //Infomer l'utilisateur que l'heure est fausse
+      oled -> clearDisplay();
+      oled -> firstPage();
+      do {
+        oled -> setFont(u8g2_font_ncenB10_tr);
+        oled -> drawStr(0,24,"Heure");
+        oled -> drawStr(0,40,"Impossible");
+      }while (oled -> nextPage());
+      delay(500);
+    }
     
   }
-  selected_hour = tab;
+  
   return selected_hour;
+  
 }
 
 mode_nuit IHM :: choose_night_mode(){
@@ -308,7 +329,9 @@ void IHM :: led_change_couleur(float temp){
   }else if(temperature >= 27 && temperature < 33){
       allumer_rouge();
   }else if(temperature > 33){
-      allumer_rouge_intense();    
+      allumer_rouge();
+      delay(100);
+      allumer_rouge();    
   }
 }
 

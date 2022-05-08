@@ -4,6 +4,7 @@
 #include <ChainableLED.h>
 #include <Arduino.h>
 #include <U8g2lib.h>
+#include <array>
 #include "definitions.h"
 #include "temps.h"
 
@@ -55,7 +56,7 @@ class IHM{
 
     void welcome_page();  //affichage écran accueil
 
-    int select_chiffre(int i, int * t);  //pour modifier un chiffre de 0 à 9
+    int select_chiffre(int i, std::array<int, 4>& t);  //pour modifier un chiffre de 0 à 9
 
     temps choose_time(); //utilisateur choisit l'heure
 

@@ -25,17 +25,17 @@ void Utilisateur_automatique::lancer(IHM * maIHM, capteur_temp * cp, ventilateur
     current_time = maIHM->choose_time();
     offset_now = now();
     current_time.afficher();
-    Serial.print("nOW = ");
-    Serial.println(offset_now);
 
     //Pour calculer le vrai temps
     temps mtn;
     unsigned long int offset = now() - offset_now;
+    Serial.println(offset);
     mtn = current_time + offset;
-    
+    mtn.afficher();
     temps temps_limite(20,0); //À partir de 20h le ventilateur s'éteint
     temps temps_limite_bas(9,0); //Avant 9h ne fonctionne pas
-    delay(100);
+    delay(300);
+    maIHM->effacer_oled();
     maIHM->page_resume_mode_autom(temp_voulue, nuit);
     
     //Boucle controle du ventilateur (Correcteur P) quand le ventilateur s'éteint la nuit
@@ -43,12 +43,10 @@ void Utilisateur_automatique::lancer(IHM * maIHM, capteur_temp * cp, ventilateur
       //Récupérer température pour erreur
       float temp_act = cp->temperature();
       int erreur = (int)(temp_act - temp_voulue);
-      
+      Serial.println("Dedans");
       // Récupérer heure actuelle
       offset = now() - offset_now;
       mtn = current_time + offset;
-      Serial.print("nOW = ");
-      Serial.println(offset_now);
       mtn.afficher();
       if (Gain*erreur < 100 && Gain*erreur > 0){
         fan->set_speed(Gain*erreur);
@@ -69,8 +67,6 @@ void Utilisateur_automatique::lancer(IHM * maIHM, capteur_temp * cp, ventilateur
     while(!maIHM->button_state()){ 
       float temp_act = cp->temperature();
       int erreur = (int)(temp_act - temp_voulue);
-      Serial.println(erreur);
-      Serial.println(temp_act);
       if (Gain*erreur < 100 && Gain*erreur > 0){
         fan->set_speed(Gain*erreur);
       } else if (Gain*erreur < 0){
