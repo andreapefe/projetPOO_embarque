@@ -8,27 +8,32 @@
 #include <Arduino.h>
 
 class temps{
+  
 public:
+
+  //constructeurs
+
   temps();
 
   temps(unsigned long h, unsigned long m);
 
+  //méthodes
+
   void afficher();
+  bool verfifier_validite();  //verifier que l'heure est possible
+
   //Operateur pour à partir d'un tableau de 4 chiffres récupérer le temps
+  
   temps & operator=(std::array<int,TAILLE_TABLEAU_TEMPS>& t);
 
-  temps & operator-=(const unsigned long s);
-
-  temps & operator+=(const unsigned long s);
-
-  bool verfifier_validite();
+  //attributs
 
   unsigned long heure;
   unsigned long minutes;
 };
 
-bool operator<(temps t, temps dt);
+bool operator<(temps t, temps dt);  //redéfinition de l'opérateur <
 
-temps & operator+(temps t, const unsigned long dt);
+temps & operator+(temps t, const unsigned long dt); //redéfinition de l'opérateur +
 
 #endif

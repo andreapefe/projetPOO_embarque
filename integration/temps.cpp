@@ -16,20 +16,6 @@ temps & temps::operator=(std::array<int,TAILLE_TABLEAU_TEMPS>& t){
   return *this; 
 }
 
-temps & temps::operator-=(const unsigned long s){
-  int h_tot = (s / 3600);
-  this->heure = (heure - h_tot)%24;
-  int m_rest = s - heure;
-  minutes = (minutes - (s / 60))%60;
-  return *this;
-}
-
-temps & temps::operator+=(const unsigned long s){
-  this->heure = (heure + (int)((s / 3600)))%24;
-  minutes = (minutes + (s / 60))%60;
-  return *this;
-}
-
 void temps::afficher(){
   Serial.print(heure);
   Serial.print(":");

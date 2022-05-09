@@ -49,8 +49,8 @@ class IHM{
     void allumer_rouge(); //allume la LED en rouge
     void allumer_bleu();  //allume la LED en bleu
     void allumer_orange();  //allume la LED en orange
-    void allumer_rouge_intense(); //la LED clignote en rouge
     void eteindre();  //eteindre la LED
+    void led_change_couleur(float temp);  //change couleur led en fonction de la temp
 
     //OLED
 
@@ -65,29 +65,21 @@ class IHM{
     void effacer_oled();
 
     void page_resume_mode_autom(float temp_voulue, mode_nuit m); //resume les specifications du mode automatique choisies par l'utilisateur
-    
-    //POTENTIOMETRE
 
-    float get_speed();  //retourne la vitesse du poto
-
-    //POTO + OLED
-    
     mode_utilisation config_mode();  //retourne le mode de configuration choisi
 
     void watch_speed(float vitesse); //visualisation graphique de la vitesse du ventilateur
 
+    float choix_temperature();  //choix de la température par l'utilisateur
+    
+    //POTENTIOMETRE
 
+    float get_speed();  //retourne la vitesse du poto
+    
     //BOUTON POUSSOIR
 
     bool button_state(); //retourne l'état du bouton poussoir
 
-    //LED changement couleur
-
-    void led_change_couleur(float temp);  //change couleur led en fonction de la temp
-
-    //CHOIX DE TEMPERATURE AVEC POTO
-
-    float choix_temperature();  //choix de la température par l'utilisateur
 };
 
 #endif

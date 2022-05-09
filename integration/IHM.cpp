@@ -19,7 +19,6 @@ void IHM :: init_IHM(){
 
 ////////////////////// LED ////////////////////////////////
 
-
 void IHM :: allumer_rouge(){
   rgb->setColorRGB(0,253,0,0);
 }
@@ -32,12 +31,25 @@ void IHM :: allumer_orange(){
   rgb->setColorRGB(0,255,140,0);
 }
 
-void IHM :: allumer_rouge_intense(){
-  rgb->setColorRGB(0,253,0,0);
-}
-
 void IHM :: eteindre(){
   rgb->setColorRGB(0,0,0,0);
+}
+
+void IHM :: led_change_couleur(float temp){
+
+  float temperature = temp;
+
+  if( temperature > 0 && temperature < 22){
+      allumer_bleu();
+  }else if(temperature >= 22 && temperature < 27){
+      allumer_orange();
+  }else if(temperature >= 27 && temperature < 33){
+      allumer_rouge();
+  }else if(temperature > 33){
+      allumer_rouge();
+      delay(100);
+      allumer_rouge();    
+  }
 }
 
 ////////////////////// OLED ////////////////////////////////
@@ -314,25 +326,6 @@ bool IHM :: button_state(){
   }
   //delay(1);
   return state;
-}
-
-////////////////// LED qui change avec temperature //////////////////
-
-void IHM :: led_change_couleur(float temp){
-
-  float temperature = temp;
-
-  if( temperature > 0 && temperature < 22){
-      allumer_bleu();
-  }else if(temperature >= 22 && temperature < 27){
-      allumer_orange();
-  }else if(temperature >= 27 && temperature < 33){
-      allumer_rouge();
-  }else if(temperature > 33){
-      allumer_rouge();
-      delay(100);
-      allumer_rouge();    
-  }
 }
 
 
