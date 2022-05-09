@@ -1,16 +1,22 @@
 #include "IHM.h"
 
+//constructeur
+
 IHM::IHM(){
   rgb = new ChainableLED(PIN_CLK,DATA_PIN,NUMBER_OF_LEDS);
   oled = new U8G2_SH1107_SEEED_128X128_1_SW_I2C(U8G2_R0, /* clock=*/ SCL, /* data=*/ SDA, /* reset=*/ U8X8_PIN_NONE);
 }
 
+//destructeur
+
 IHM :: ~IHM(){}
+
+
+//////////////// initialisation de l'IHM ///////////////////
 
 void IHM :: init_IHM(){
   rgb->init();  //led rgb
   oled -> begin();  //écran oled
-  //Serial.begin(9600);
   Serial.begin(9600);
   pinMode(ROTARY_ANGLE_SENSOR, INPUT);  //poto
   pinMode(PUSHBUTTON, INPUT); //bouton poussoir
@@ -81,17 +87,17 @@ int IHM :: select_chiffre(int i, std::array<int, 4>& t){
       oled -> setFont(u8g2_font_ncenB10_tr);
       oled -> drawStr(0,24,"Heure locale :");
 
-      //affichage des digits de l'heure selectionnée
+      //affichage des digits de l'heure selectionnée, stockés dans un tableau de taille 4
       
       oled -> drawStr(20,60, ":");
-      if(i >= 3){
+      if(i >= 3){ //on affiche les trois premiers digits pendant qu'on sélectionne le dernier
         oled -> drawStr(0,60, String(t[0]).c_str());
         oled -> drawStr(10,60, String(t[1]).c_str());
         oled -> drawStr(25,60, String(t[2]).c_str());
-      } else if (i >= 2){
+      } else if (i >= 2){ //on affiche les deux premiers digits pendant qu'on sélectionne le troisième
         oled -> drawStr(0,60, String(t[0]).c_str());
         oled -> drawStr(10,60, String(t[1]).c_str());
-      } else if (i >= 1){
+      } else if (i >= 1){ //on affiche le premier digit pendant qu'on sélectionne le deuxième
         oled -> drawStr(0,60, String(t[0]).c_str());
       }
 
@@ -142,6 +148,7 @@ temps IHM :: choose_time(){
   temps selected_hour;
   
   oled -> clearDisplay();  //effacer écran
+  
   //Tant que l'heure n'est pas valide on continue à demander l'heure
   while(!heure_valide){
     
@@ -169,14 +176,13 @@ temps IHM :: choose_time(){
   }
   
   return selected_hour;
-  
 }
 
 mode_nuit IHM :: choose_night_mode(){
 
-oled -> clearDisplay();  //effacer écran
+    oled -> clearDisplay();  //effacer écran
 
-   float angle  = get_speed(); //récupérer valeur potentiomètre
+   float angle;
 
    while(!this->button_state()){
 
@@ -226,27 +232,9 @@ void IHM :: page_resume_mode_autom(float temp_voulue, mode_nuit m){
         oled -> drawStr(0,30,"Inactif");
       }
       oled -> drawStr(0,50,"Consigne :");
-      oled -> drawStr(0,70,String(temp_voulue).c_str());
+      oled -> drawStr(0,70,String(temp_voulue).c_str());  //affiche la température qui a été demandée en consigne
     } while (oled -> nextPage());
 }
-
-
-
-////////////////////// POTO ////////////////////////////////
-
-float IHM :: get_speed(){
-  
-  float voltage;
-  int sensor_value = analogRead(ROTARY_ANGLE_SENSOR);
-  voltage = (float)sensor_value*ADC_REF/1023;
-  float degrees = (voltage*FULL_ANGLE)/GROVE_VCC;
-  //Serial.println("The angle between the mark and the starting position:");
-  //Serial.println(degrees);
-
-  return degrees;
-}
-
-////////////////////// POTO + OLED ////////////////////////////////
 
 mode_utilisation IHM :: config_mode(){
    oled -> clearDisplay();  //effacer écran
@@ -289,6 +277,8 @@ void IHM :: watch_speed(float vitesse){
     oled -> drawRFrame(21,85,70,41,0); //(x,y,largeur,hauteur,arrondi des angles) cadre cancel
     oled -> drawStr(24,110,"CANCEL");  //bouton CANCEL pour retourner au menu initial
 
+    //remplissage d'une barre (rectangle) qui correspond à l'état de vitesse du ventilateur
+
     if( vitesse < 10){
       oled -> drawBox(0,60,10,10);
     }else if(vitesse >= 10 && vitesse < 20){
@@ -313,29 +303,16 @@ void IHM :: watch_speed(float vitesse){
   }while (oled -> nextPage());
 }
 
-////////////////////// BOUTON POUSSOIR ////////////////////////////////
-
-bool IHM :: button_state(){
-  bool state = false;
-  if (digitalRead(PUSHBUTTON) == HIGH){
-    state = true ;
-  }
-  //delay(1);
-  return state;
-}
-
-/////////////  CHOIX DE TEMPERATURE AVEC POTO /////////////////////
-
 float IHM :: choix_temperature(){
 
   float temp = 20.0;
-  float angle = get_speed(); //récupérer valeur potentiomètre
+  float angle;
   
   oled -> clearDisplay();  //effacer écran
 
   while(!this->button_state()){
 
-    angle = this->get_speed(); 
+    angle = this->get_speed(); //récupérer valeur potentiomètre
 
     oled -> firstPage();
   
@@ -346,6 +323,8 @@ float IHM :: choix_temperature(){
       oled -> drawStr(0,40, "temperature :");
       oled -> drawStr(0,60, String(temp).c_str());
       oled -> drawStr(40,60,"°C ");
+
+      //à chaque plage d'angle du poto correspond une température entre 20 et 35°C
       
       if(angle >= 0 && angle < 20){
         temp = 20.0;
@@ -399,4 +378,27 @@ float IHM :: choix_temperature(){
     }while (oled -> nextPage());    
   }
   return temp;  
+}
+
+////////////////////// POTO ////////////////////////////////
+
+float IHM :: get_speed(){
+  
+  float voltage;
+  int sensor_value = analogRead(ROTARY_ANGLE_SENSOR); //retourne l'angle du poto en binaire
+  voltage = (float)sensor_value*ADC_REF/1023; //conversion 
+  float degrees = (voltage*FULL_ANGLE)/GROVE_VCC; //conversion en degrés
+
+  return degrees;
+}
+
+////////////////////// BOUTON POUSSOIR ////////////////////////////////
+
+bool IHM :: button_state(){
+  bool state = false;
+  if (digitalRead(PUSHBUTTON) == HIGH){ //état dans lequel le bouton est appuyé
+    state = true ;
+  }
+  //delay(1);
+  return state;
 }
