@@ -11,33 +11,28 @@
 #include <CurieTime.h>
 
 #define Gain 15 //correcteur proportionnel
+#define HEURE_MAX 20 //Heure max d'utilisation
+#define HEURE_MIN 9 //Heure min d'utilisation
 
 class Utilisateur_automatique : public Utilisateur {
   
 public:
 
-  //Constructeurs
-  
+  //Constructeurs  
   Utilisateur_automatique();
 
-  //Methodes affichage sur le Serial
-  
-  void afficherParametres(HardwareSerial * port);
-
-  //Méthodes pour commander le ventilateur
-
+  //Méthode pour commander le ventilateur et lancer l'éxécution du programme 
   void lancer(IHM * maIHM, capteur_temp * cp, ventilateur * fan);
+  //Méthode pour assigner le mode nuit
   void set_mode_nuit(mode_nuit m);
 
 
 private:
-  
   //Attributs
-  
-  temps current_time;
-  unsigned long int offset_now;
-  float temp_voulue;
-  mode_nuit nuit;
+  temps current_time; //On rècupère l'heure actuelle
+  unsigned long int offset_now; //On récupère le temps interne de l'Arduino pour mettre à zéro
+  float temp_voulue; //Température voulue en consigne
+  mode_nuit nuit; //Ventilateur actif la nuuit ou pas
   
 };
 

@@ -15,12 +15,7 @@ public:
   
   Utilisateur_manuel();
 
-  //Methodes affichage sur le Serial
-  
-  void afficherParametres(HardwareSerial * port);
-
-  //Méthode pour commander le ventilateur
-
+  //Méthode pour commander le ventilateur avec le potentiomètre
   void lancer(IHM * maIHM, capteur_temp * cp, ventilateur * fan);
   
 };

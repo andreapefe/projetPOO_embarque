@@ -5,6 +5,7 @@
 #include "capteur_temp.h"
 #include "utilisateur_automatique.h"
 #include "temps.h"
+#include <array>
 
 IHM monIHM;
 Utilisateur * user;
@@ -19,6 +20,7 @@ void setup() {
   monIHM.init_IHM();
   Serial.begin(9600);
   vent.configuration();
+  
 }
 
 void loop() {
