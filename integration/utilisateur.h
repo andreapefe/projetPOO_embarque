@@ -7,15 +7,21 @@
 #include "ventilateur.h"
 #include "temps.h"
 
+/* 
+ *  Titre : Classe virtuelle Utilisateur
+ *  Auteur : Andrea Pérez 
+ *  Description : Classe virtuelle qui défini une méthode virtuelle pour lancer
+ *  l'éxécution du programme de contrôle du ventilateur
+ */
+
 class Utilisateur{
   
 public:
 
   //Constructeur
-  
   Utilisateur();
 
-  //Méthodes pour configurer l'utilisateur
+  //Asseseur pour configurer l'utilisateur
   mode_utilisation get_mode();  //récupérer le mode choisit par l'utilisateur pour l'afficher après
   void set_mode(mode_utilisation mod);  //configurer le mode voulu par l'utilisateur
 
@@ -24,8 +30,7 @@ public:
   
 private:
 
-  //Attribut
-  
+  //mode utilisation automatique ou manuel
   mode_utilisation modo;   
 
 };

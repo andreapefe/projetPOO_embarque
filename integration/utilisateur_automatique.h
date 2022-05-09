@@ -10,6 +10,13 @@
 #include "temps.h"
 #include <CurieTime.h>
 
+/* 
+ *  Titre : Classe Utilisateur_automatique
+ *  Auteur : Andrea Pérez 
+ *  Description : Spécialisation de Utilsateur qui défini lancer
+ *  pour le mode automatique
+ */
+
 #define Gain 15 //correcteur proportionnel
 #define HEURE_MAX 20 //Heure max d'utilisation
 #define HEURE_MIN 9 //Heure min d'utilisation
