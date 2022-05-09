@@ -32,12 +32,26 @@ void IHM :: allumer_orange(){
   rgb->setColorRGB(0,255,140,0);
 }
 
-void IHM :: allumer_rouge_intense(){
-  rgb->setColorRGB(0,253,0,0);
-}
-
 void IHM :: eteindre(){
   rgb->setColorRGB(0,0,0,0);
+}
+
+void IHM :: led_change_couleur(float temp){
+
+  float temperature = temp;
+
+  if( temperature > 0 && temperature < 22){
+      allumer_bleu();
+  }else if(temperature >= 22 && temperature < 27){
+      allumer_orange();
+  }else if(temperature >= 27 && temperature < 33){
+      allumer_rouge();
+  }else if(temperature > 33){ //on fait clignoter en rouge
+      allumer_rouge();
+      delay(100);
+      eteindre();
+      delay(100);    
+  }
 }
 
 ////////////////////// OLED ////////////////////////////////
@@ -46,31 +60,28 @@ void IHM :: welcome_page(){
   
   oled -> firstPage();
   do {
-    oled -> setFont(u8g2_font_ncenB10_tr);
+    oled -> setFont(u8g2_font_ncenB10_tr);  //choix de police pour écriture
     oled -> drawStr(0,24,"BIENVENUE");
     oled -> drawStr(0,50,"iFAN v1.0");
   } while (oled -> nextPage());
 }
 
-<<<<<<< Updated upstream
-
 int IHM :: select_chiffre(int i, std::array<int, 4>& t){
-=======
-int IHM :: select_chiffre(int i, int * t){
->>>>>>> Stashed changes
 
   int chiffre = 0;
-  float angle = get_speed(); //récupérer valeur potentiomètre
+  float angle;
 
   oled -> clearDisplay();
   
   while(!this->button_state()){
-    angle = get_speed(); 
+    angle = get_speed();  //récupérer valeur potentiomètre
     
     oled -> firstPage();
     do {
       oled -> setFont(u8g2_font_ncenB10_tr);
       oled -> drawStr(0,24,"Heure locale :");
+
+      //affichage des digits de l'heure selectionnée
       
       oled -> drawStr(20,60, ":");
       if(i >= 3){
@@ -83,12 +94,9 @@ int IHM :: select_chiffre(int i, int * t){
       } else if (i >= 1){
         oled -> drawStr(0,60, String(t[0]).c_str());
       }
-      //oled -> drawStr(0,60, String(chiffre).c_str());
-      //oled -> drawStr(10,60, String(chiffre).c_str());
-      //oled -> drawStr(18,60, ":");
-      //oled -> drawStr(30,60, String(chiffre).c_str());
-      //oled -> drawStr(40,60, String(chiffre).c_str()); 
-        
+
+      //on divise les plages d'angles du poto qui correspondent à un chiffre en 0 et 9
+      
       if(angle >= 0 && angle < 30){
         chiffre = 0;
         oled -> drawStr(10*i+i/2*7,60,String(chiffre).c_str());
@@ -140,7 +148,6 @@ temps IHM :: choose_time(){
     for(int i=0; i<tab.size(); i++){
       tab[i] = select_chiffre(i, tab);
       delay(500);
-    //Serial.println(tab[i]);
     }
     
     selected_hour = tab;
@@ -172,11 +179,8 @@ oled -> clearDisplay();  //effacer écran
    float angle  = get_speed(); //récupérer valeur potentiomètre
 
    while(!this->button_state()){
-<<<<<<< Updated upstream
+
     angle = this -> get_speed(); //récupérer valeur potentiomètre
-=======
-    angle = get_speed(); //récupérer valeur potentiomètre
->>>>>>> Stashed changes
 
     oled -> firstPage();
     do {
@@ -242,10 +246,6 @@ float IHM :: get_speed(){
   return degrees;
 }
 
-<<<<<<< Updated upstream
-=======
-
->>>>>>> Stashed changes
 ////////////////////// POTO + OLED ////////////////////////////////
 
 mode_utilisation IHM :: config_mode(){
@@ -254,11 +254,8 @@ mode_utilisation IHM :: config_mode(){
    float angle = get_speed(); //récupérer valeur potentiomètre
 
    while(!this->button_state()){
-<<<<<<< Updated upstream
+
     angle = this -> get_speed(); //récupérer valeur potentiomètre
-=======
-    angle = get_speed(); //récupérer valeur potentiomètre
->>>>>>> Stashed changes
 
     oled -> firstPage();
     do {
@@ -287,16 +284,11 @@ void IHM :: watch_speed(float vitesse){
   do {
     oled -> drawRFrame(0,60,100,10,0); //(x,y,largeur,hauteur,arrondi des angles) barre vitesse ventilateur
     oled -> drawStr(0,59,"0%");  //début de barre : vitesse min
-<<<<<<< Updated upstream
+
     oled -> drawStr(90,59,"100%");  //fin de barre : vitesse max
     oled -> drawRFrame(21,85,70,41,0); //(x,y,largeur,hauteur,arrondi des angles) cadre cancel
     oled -> drawStr(24,110,"CANCEL");  //bouton CANCEL pour retourner au menu initial
 
-=======
-    oled -> drawStr(95,59,"100%");  //fin de barre : vitesse max
-    oled -> drawRFrame(50,90,70,50,0); //(x,y,largeur,hauteur,arrondi des angles) cadre cancel
-    oled -> drawStr(52,92,"CANCEL");  //bouton CANCEL pour retourner au menu initial
->>>>>>> Stashed changes
     if( vitesse < 10){
       oled -> drawBox(0,60,10,10);
     }else if(vitesse >= 10 && vitesse < 20){
@@ -322,12 +314,6 @@ void IHM :: watch_speed(float vitesse){
 }
 
 ////////////////////// BOUTON POUSSOIR ////////////////////////////////
-/*
-int IHM :: button_state(){
-  int state = digitalRead(PUSHBUTTON);    
-}*/
-
-////////////////////// BOUTON POUSSOIR ////////////////////////////////
 
 bool IHM :: button_state(){
   bool state = false;
@@ -337,27 +323,6 @@ bool IHM :: button_state(){
   //delay(1);
   return state;
 }
-
-////////////////// LED qui change avec temperature //////////////////
-
-void IHM :: led_change_couleur(float temp){
-
-  float temperature = temp;
-
-  if( temperature > 0 && temperature < 22){
-      allumer_bleu();
-  }else if(temperature >= 22 && temperature < 27){
-      allumer_orange();
-  }else if(temperature >= 27 && temperature < 33){
-      allumer_rouge();
-  }else if(temperature > 33){
-      allumer_rouge();
-      delay(100);
-      eteindre();
-      delay(100);    
-  }
-}
-
 
 /////////////  CHOIX DE TEMPERATURE AVEC POTO /////////////////////
 
@@ -369,11 +334,8 @@ float IHM :: choix_temperature(){
   oled -> clearDisplay();  //effacer écran
 
   while(!this->button_state()){
-<<<<<<< Updated upstream
+
     angle = this->get_speed(); 
-=======
-    angle = get_speed(); 
->>>>>>> Stashed changes
 
     oled -> firstPage();
   

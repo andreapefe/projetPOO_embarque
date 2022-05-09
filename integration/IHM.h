@@ -49,25 +49,14 @@ class IHM{
     void allumer_rouge(); //allume la LED en rouge
     void allumer_bleu();  //allume la LED en bleu
     void allumer_orange();  //allume la LED en orange
-<<<<<<< Updated upstream
     void eteindre();  //eteindre la LED
     void led_change_couleur(float temp);  //change couleur led en fonction de la temp
-=======
-    void allumer_rouge_intense(); //fait cligniter le led en rouge
-    void eteindre();  //eteindre la LED
->>>>>>> Stashed changes
 
     //OLED
 
     void welcome_page();  //affichage écran accueil
 
-<<<<<<< Updated upstream
     int select_chiffre(int i, std::array<int, 4>& t);  //pour modifier un chiffre de 0 à 9
-=======
-    void afficher_vitesse();  //afficher la vitesse à l'écran
-
-    int select_chiffre(int i, int * t);  //pour modifier un chiffre de 0 à 9
->>>>>>> Stashed changes
 
     temps choose_time(); //utilisateur choisit l'heure
 
@@ -75,11 +64,7 @@ class IHM{
 
     void effacer_oled();
 
-<<<<<<< Updated upstream
     void page_resume_mode_autom(float temp_voulue, mode_nuit m); //resume les specifications du mode automatique choisies par l'utilisateur
-=======
-    float get_speed(); //renvoie valeur du potentiomètre (vitesse ventilateur)
->>>>>>> Stashed changes
 
     mode_utilisation config_mode();  //retourne le mode de configuration choisi
 
