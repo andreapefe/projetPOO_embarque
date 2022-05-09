@@ -331,7 +331,8 @@ void IHM :: led_change_couleur(float temp){
   }else if(temperature > 33){
       allumer_rouge();
       delay(100);
-      allumer_rouge();    
+      eteindre();
+      delay(100);    
   }
 }
 
