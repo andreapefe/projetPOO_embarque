@@ -386,8 +386,8 @@ float IHM :: get_speed(){
   
   float voltage;
   //Calculs à partir de la référence : https://wiki.seeedstudio.com/Grove-Rotary_Angle_Sensor/ 
-  int sensor_value = analogRead(ROTARY_ANGLE_SENSOR); //retourne l'angle du poto en binaire
-  voltage = (float)sensor_value*ADC_REF/1023; //conversion 
+  int sensor_value = analogRead(ROTARY_ANGLE_SENSOR); //retourne l'angle du poto
+  voltage = (float)sensor_value*ADC_REF/1023; 
   float degrees = (voltage*FULL_ANGLE)/GROVE_VCC; //conversion en degrés
 
   return degrees;
