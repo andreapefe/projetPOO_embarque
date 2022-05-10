@@ -8,6 +8,13 @@
 #include "definitions.h"
 #include "temps.h"
 
+/**
+ * Titre : Classe Interface Homme Machine
+ * Auteur : Léa Scheer
+ * Description : Classe pour gérer l'écran OLED, le button poussoir, le potentiomètre et la LED rgb
+ */
+
+
 //led
 
 #define PIN_CLK 3
