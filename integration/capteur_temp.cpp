@@ -14,7 +14,7 @@ float capteur_temp::temperature(){
   float R = 1023.0/a-1.0;
   R = R0*R;
   float temperature = 1.0/(log(R/R0)/B+1/298.15)-273.15;
-  temperature -= 20;
+  temperature -= 25;
   Serial.println(temperature);
   return temperature;
 }

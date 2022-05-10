@@ -40,7 +40,7 @@ temps & temps::operator=(std::array<int,TAILLE_TABLEAU_TEMPS>& t){
   return *this; 
 }
 
-//Opérateur pour pouvoir comparer deux temps entre heux
+//Opérateur pour pouvoir comparer deux temps entre eux
 bool operator<(temps t, temps dt){
   bool retour;
   if (t.heure < dt.heure){
@@ -56,7 +56,7 @@ bool operator<(temps t, temps dt){
 //Opérateur pour rajouter à un objet de type temps du temps en secondes en effectuant les calcules nécessaires
 temps & operator+(temps t, const unsigned long dt){
   Serial.println(dt);
-  //Serial.println(dt/3600);
+  Serial.println(dt/3600);
   //On récupére le nombre d'heures à rajouter
   int h_rest = dt/3600;
   t.heure = (t.heure + h_rest); //rajoute les heures directes 
@@ -71,7 +71,8 @@ temps & operator+(temps t, const unsigned long dt){
   } else {
     t.minutes = (t.minutes + m_rest); //dans l'autre cas addition directe
   }
-
+  Serial.println(t.heure);
+  Serial.println(t.minutes);
   t.heure = t.heure % 24; //On fait modulo 24 pour éviter d'avoir une heure plus grande
   return t;
 }
